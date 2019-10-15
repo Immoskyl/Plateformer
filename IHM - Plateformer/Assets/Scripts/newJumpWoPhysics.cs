@@ -6,18 +6,29 @@ using UnityEngine;
 public class newJumpWoPhysics : MonoBehaviour
 {
     /**
+    * Number of Jumps possible in a row unlocked by the character
+    */
+    [SerializeField]
+    private int numberOfJumps;
+    
+    /**
+    * Jumps done in a row by the character
+    */
+    private int jumpsInARow;
+    
+    /**
      * Value of the character running in the left of right direction
      */
     [SerializeField]
-    [Range(0.1f, 10)]
-    private float baseSpeed;
+    [Range(0.1f, 50)]
+    private float acceleration;
     
     
     /**
      * Number of frames before the character reaches its baseSpeed from idle position
      */
     [SerializeField]
-    [Range(1, 10)]
+    [Range(1, 20)]
     private int baseInertia;
     
     /**
@@ -31,41 +42,101 @@ public class newJumpWoPhysics : MonoBehaviour
      * Maximum vertical speed possible attributed to the character at any time
      */
     [SerializeField]
-    [Range(0.1f, 20)]
+    [Range(0.1f, 30)]
     private float verticalMaxSpeed;
     
     /**
      * Maximum horizontal speed possible attributed to the character at any time
     */
     [SerializeField]
-    [Range(0.1f, 20)]
+    [Range(0.1f, 30)]
     private float horizontalMaxSpeed;
+
+    [SerializeField]
+    [Range(0.1f, 20)]
+    private float jumpStrenght;
+    
+    [SerializeField]
+    [Range(1, 10)]
+    private float jumpRound;
+    
+    [SerializeField]
+    [Range(0.1f, 20)]
+    private float gravity;
+    
     
     private Vector2 maxSpeed;
-    private Vector2 lastFrameSpeed;
     
     /**
      * Dict where all the forces determining the final speed of the characters
      */
     private Dictionary<int, Vector2> forceSummary;
 
-    public float Mass { get; set; }
+    public int NumberOfJumps
+    {
+        get => numberOfJumps;
+        set => numberOfJumps = value;
+    }
 
-    public float VerticalMaxSpeed {get; set;}
+    public int JumpsInARow
+    {
+        get => jumpsInARow;
+        set => jumpsInARow = value;
+    }
 
-    public float HorizontalMaxSpeed {get; set;}
 
-    public Vector2 MaxSpeed {get; set;}
+    public float VerticalMaxSpeed
+    {
+        get => verticalMaxSpeed;
+        set => verticalMaxSpeed = value;
+    }
 
-    public Vector2 LastFrameSpeed {get; set;}
+    public float HorizontalMaxSpeed
+    {
+        get => horizontalMaxSpeed;
+        set => horizontalMaxSpeed = value;
+    }
 
+    public float Mass
+    {
+        get => mass;
+        set => mass = value;
+    }
+
+    public float JumpStrenght
+    {
+        get => jumpStrenght;
+        set => jumpStrenght = value;
+    }
+
+    public float JumpRound
+    {
+        get => jumpRound;
+        set => jumpRound = value;
+    }
+
+    public float Gravity
+    {
+        get => gravity;
+        set => gravity = value;
+    }
+    
+    public Vector2 MaxSpeed
+    {
+        get => maxSpeed;
+        set => maxSpeed = value;
+    }
+
+
+    /**
+     * Add the value to a force corresponding to a key
+     */
     public void AddForce(Forces key, Vector2 value)
     {
         int dictKey = (int) key;
 
         if (forceSummary.ContainsKey(dictKey))
         {
-            Debug.Log("adding force to forceSummary: " + value + " Old Force =" + forceSummary[dictKey] + " and new force = " + (forceSummary[dictKey] + value));
             forceSummary[dictKey] += value;
         }
         else
@@ -74,6 +145,9 @@ public class newJumpWoPhysics : MonoBehaviour
         }
     }
 
+    /**
+     * Remove totally the value of a force corresponding to a key
+     */
     public void RemoveForce(Forces key)
     {
         int dictKey = (int) key;
@@ -82,7 +156,10 @@ public class newJumpWoPhysics : MonoBehaviour
             forceSummary.Remove(dictKey);
         }
     }
-
+    
+    /**
+     * Return the value of a force corresponding to a key
+     */
     public Vector2 GetForce(Forces key)
     {
         int dictKey = (int) key;
@@ -93,6 +170,11 @@ public class newJumpWoPhysics : MonoBehaviour
         return Vector2.zero;
     }
     
+    /**
+     * 
+     * Different forces to apply to the character
+     * If you want the character to go leftwards, put some value to GoLeft, and equivalent for right.
+     */
     public enum Forces
     {
         GoLeft = 1,
@@ -101,29 +183,35 @@ public class newJumpWoPhysics : MonoBehaviour
         Falling = 4
     }
 
-    private Vector2 VectorMax(Vector2 v1, Vector2 v2)
+    private Vector2 KeepVectorInBoundaries(Vector2 v, Vector2 boundaries)
     {
         var res = new Vector2();
-        res.x = Math.Max(v1.x, v2.x);
-        res.y = Math.Max(v1.y, v2.y);
+        
+        var x = Math.Max(v.x, -boundaries.x);
+        res.x = Math.Min(x, boundaries.x);
+
+        var y = Math.Max(v.y, -boundaries.y);
+        res.y = Math.Min(y, boundaries.y);
+        
         return res;
     }
-    
-    private void setLeftForceGood()
+
+    private Vector2 VectorRound(Vector2 v, int precision)
     {
-        Vector2 leftForce = GetForce(Forces.GoLeft);
-        leftForce.x = - leftForce.x;
-        RemoveForce(Forces.GoLeft);
-        AddForce(Forces.GoLeft, leftForce);
+        return new Vector2((float) Math.Round(v.x, precision), (float) Math.Round(v.y, precision));
     }
 
-
+    /**
+     * Init various parameters
+     */
     private void Init()
     {
-        maxSpeed = new Vector2(HorizontalMaxSpeed, VerticalMaxSpeed);
-        lastFrameSpeed = Vector2.zero;
+        MaxSpeed = new Vector2(HorizontalMaxSpeed / 10, VerticalMaxSpeed / 10);
+        acceleration = acceleration / 10;
         
         forceSummary = new Dictionary<int, Vector2>();
+        
+        Fall();
     }
     
     void Start()
@@ -134,10 +222,8 @@ public class newJumpWoPhysics : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis("A") == 1)
-        {
+        if (Input.GetButtonDown("A"))
             Jump();
-        }
         Run();
     }
 
@@ -145,33 +231,28 @@ public class newJumpWoPhysics : MonoBehaviour
     {
         Vector2 frameMovement = CalcSpeed();
         transform.Translate(frameMovement.x, frameMovement.y, 0);
-        lastFrameSpeed = frameMovement;
+        DecayJump();
     }
 
     private Vector2 CalcSpeed()
     {
-        setLeftForceGood();
-
-        Debug.Log("forcesSummary:" + forceSummary);
-        
         var forceSum = Vector2.zero;
         foreach (KeyValuePair<int, Vector2> entry in forceSummary)
         {
-            forceSum += entry.Value;
+            if (entry.Key == (int)Forces.GoLeft || entry.Key == (int)Forces.Falling)
+                forceSum -= entry.Value;
+            else
+                forceSum += entry.Value;
         }
 
-        var thisFrameSpeed = forceSum * (1 / mass) * Time.deltaTime;
-        var totalSpeed = lastFrameSpeed + thisFrameSpeed;
-        totalSpeed = VectorMax(totalSpeed, maxSpeed);    
-        
-        lastFrameSpeed = totalSpeed;
-        
+        var forceSpeed = forceSum * (1 / mass) * Time.deltaTime;
+        var totalSpeed = VectorRound(KeepVectorInBoundaries(forceSpeed, maxSpeed), 3);
         return totalSpeed;
     }
     
     public void Jump()
     {
-        lastFrameSpeed.y = 30;
+        AddForce(Forces.Jumping, new Vector2(0, jumpStrenght*10));
     }
 
     public void Run()
@@ -181,27 +262,17 @@ public class newJumpWoPhysics : MonoBehaviour
 
         if (horizontalAxis < 0)
         {
-            Debug.Log("going left");
             direction = Forces.GoLeft;
-            
             if (GetForce(Forces.GoRight).x > 0)
-            {
                 BackToZero(Forces.GoRight);
-            }
         }
         else if (horizontalAxis > 0)
         {
-            Debug.Log("going right");
-
             direction = Forces.GoRight;
-            
             if (GetForce(Forces.GoLeft).x > 0)
-            {
                 BackToZero(Forces.GoLeft);
-            }
         }
         else {
-            Debug.Log("stopped");
             BackToZero(Forces.GoRight);
             BackToZero(Forces.GoLeft);
             return;
@@ -213,30 +284,30 @@ public class newJumpWoPhysics : MonoBehaviour
     
     private void BackToZero(Forces direction)
     {
-        float forceToApply = baseSpeed / baseInertia;
         float currentForce = GetForce(direction).x;
-        if (currentForce < forceToApply)
-        {
-            forceToApply = currentForce;
-        }
+        float forceToApply = currentForce / baseInertia;
         AddForce(direction, new Vector2(- forceToApply, 0));
     }
-    
-    
+
+    private void DecayJump()
+    {
+        float jumpForce = GetForce(Forces.Jumping).y;
+        if (jumpForce > 0)
+        {
+            float forceToApply = jumpStrenght / JumpRound;
+            if (jumpForce - forceToApply < 0)
+                forceToApply = jumpForce;
+            AddForce(Forces.Jumping, new Vector2(0, - forceToApply));
+        }
+    }
+
     public float CalculateHorizontalForce(float horizontalAxis)
     {
-        float forceToApply;
-        float potentialSpeed = baseSpeed * Math.Abs(horizontalAxis);
-        Debug.Log("potentialSpeed: " + potentialSpeed);
-        float relativeMaxSpeed = baseSpeed / baseInertia;
-        Debug.Log("relativeMaxSpeed: " + relativeMaxSpeed);
-        if (potentialSpeed > relativeMaxSpeed)
-            forceToApply = relativeMaxSpeed;
-        else
-            forceToApply = potentialSpeed;
-
-        Debug.Log("forceToApply: "+ forceToApply);
-        return forceToApply;
+        return acceleration * Math.Abs(horizontalAxis);
     }
-    
+
+    public void Fall()
+    {
+        AddForce(Forces.Falling, new Vector2(0, gravity * 2));
+    }
 }
