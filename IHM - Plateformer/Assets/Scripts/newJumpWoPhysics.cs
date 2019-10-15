@@ -222,7 +222,7 @@ public class newJumpWoPhysics : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("A"))
+        if (Input.GetButtonDown("A") && JumpsInARow < NumberOfJumps)
             Jump();
         Run();
     }
@@ -252,6 +252,7 @@ public class newJumpWoPhysics : MonoBehaviour
     
     public void Jump()
     {
+        JumpsInARow++;
         AddForce(Forces.Jumping, new Vector2(0, jumpStrenght*10));
     }
 
