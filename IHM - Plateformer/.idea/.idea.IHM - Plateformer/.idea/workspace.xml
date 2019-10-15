@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="032df3ae-67ea-4510-906c-1dd631f6ad92" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.IHM - Plateformer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.IHM - Plateformer/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/newJumpWoPhysics.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/newJumpWoPhysics.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/InspectorExpandedItems.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Library/InspectorExpandedItems.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/ScriptAssemblies/BuiltinAssemblies.stamp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/assetDatabase3" beforeDir="false" afterPath="$PROJECT_DIR$/Library/assetDatabase3" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -94,7 +95,7 @@
       <workItem from="1570993423374" duration="3192000" />
       <workItem from="1571037361046" duration="1673000" />
       <workItem from="1571058531939" duration="9529000" />
-      <workItem from="1571124030460" duration="26514000" />
+      <workItem from="1571124030460" duration="30326000" />
     </task>
     <task id="LOCAL-00001" summary="changes">
       <created>1571138068411</created>
@@ -110,7 +111,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571153289131</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="double saut implémenté (nb de saut réglable)">
+      <created>1571153460611</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1571153460611</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
@@ -133,7 +141,8 @@
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
     <MESSAGE value="changes" />
     <MESSAGE value="MOVING AND JUMPING WORK" />
-    <option name="LAST_COMMIT_MESSAGE" value="MOVING AND JUMPING WORK" />
+    <MESSAGE value="double saut implémenté (nb de saut réglable)" />
+    <option name="LAST_COMMIT_MESSAGE" value="double saut implémenté (nb de saut réglable)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

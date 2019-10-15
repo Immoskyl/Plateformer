@@ -460,12 +460,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf759b4c54eec664da47d71df4b9a9ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfJumps: 5
   acceleration: 43.7
   baseInertia: 2
   mass: 3.54
   verticalMaxSpeed: 7.2
   horizontalMaxSpeed: 16.9
-  jumpStrenght: 10.2
+  jumpStrength: 9.56
   jumpRound: 2.81
   gravity: 9.7
 --- !u!212 &698382629

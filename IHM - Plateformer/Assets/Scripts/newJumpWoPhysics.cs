@@ -3,8 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class newJumpWoPhysics : MonoBehaviour
 {
+    
+    /**
+    * Allows a character to Move and Jump according to settable parameters by summing different forces (on both X and Y)
+    * This way you can define properly the movements and feelings you cant to give to your character.
+    **/
+    
+    
+    //////////////////////////////////////////////////////
+    ///                ATTRIBUTES
+    //////////////////////////////////////////////////////
+
     /**
     * Number of Jumps possible in a row unlocked by the character
     */
@@ -22,8 +34,7 @@ public class newJumpWoPhysics : MonoBehaviour
     [SerializeField]
     [Range(0.1f, 50)]
     private float acceleration;
-    
-    
+
     /**
      * Number of frames before the character reaches its baseSpeed from idle position
      */
@@ -54,7 +65,7 @@ public class newJumpWoPhysics : MonoBehaviour
 
     [SerializeField]
     [Range(0.1f, 20)]
-    private float jumpStrenght;
+    private float jumpStrength;
     
     [SerializeField]
     [Range(1, 10)]
@@ -64,14 +75,32 @@ public class newJumpWoPhysics : MonoBehaviour
     [Range(0.1f, 20)]
     private float gravity;
     
-    
     private Vector2 maxSpeed;
-    
+
     /**
      * Dict where all the forces determining the final speed of the characters
      */
     private Dictionary<int, Vector2> forceSummary;
+    
+    
+    /**
+    * 
+    * Different forces to apply to the character
+    * If you want the character to go leftwards, put some value to GoLeft, and equivalent for right.
+    */
+    public enum Forces
+    {
+        GoLeft = 1,
+        GoRight = 2,
+        Jumping = 3,
+        Falling = 4
+    }
 
+    //////////////////////////////////////////////////////
+    ///                GETTERS & SETTERS
+    //////////////////////////////////////////////////////
+
+    
     public int NumberOfJumps
     {
         get => numberOfJumps;
@@ -83,7 +112,6 @@ public class newJumpWoPhysics : MonoBehaviour
         get => jumpsInARow;
         set => jumpsInARow = value;
     }
-
 
     public float VerticalMaxSpeed
     {
@@ -103,10 +131,10 @@ public class newJumpWoPhysics : MonoBehaviour
         set => mass = value;
     }
 
-    public float JumpStrenght
+    public float JumpStrength
     {
-        get => jumpStrenght;
-        set => jumpStrenght = value;
+        get => jumpStrength;
+        set => jumpStrength = value;
     }
 
     public float JumpRound
@@ -127,7 +155,11 @@ public class newJumpWoPhysics : MonoBehaviour
         set => maxSpeed = value;
     }
 
+    //////////////////////////////////////////////////////
+    ///                UTILS
+    //////////////////////////////////////////////////////
 
+    
     /**
      * Add the value to a force corresponding to a key
      */
@@ -136,15 +168,12 @@ public class newJumpWoPhysics : MonoBehaviour
         int dictKey = (int) key;
 
         if (forceSummary.ContainsKey(dictKey))
-        {
             forceSummary[dictKey] += value;
-        }
         else
-        {
             forceSummary[dictKey] = value;
-        }
     }
 
+    
     /**
      * Remove totally the value of a force corresponding to a key
      */
@@ -152,10 +181,9 @@ public class newJumpWoPhysics : MonoBehaviour
     {
         int dictKey = (int) key;
         if (forceSummary.ContainsKey(dictKey))
-        {
             forceSummary.Remove(dictKey);
-        }
     }
+    
     
     /**
      * Return the value of a force corresponding to a key
@@ -164,25 +192,13 @@ public class newJumpWoPhysics : MonoBehaviour
     {
         int dictKey = (int) key;
         if (forceSummary.ContainsKey(dictKey))
-        {
             return forceSummary[dictKey];
-        }
         return Vector2.zero;
     }
-    
-    /**
-     * 
-     * Different forces to apply to the character
-     * If you want the character to go leftwards, put some value to GoLeft, and equivalent for right.
-     */
-    public enum Forces
-    {
-        GoLeft = 1,
-        GoRight = 2,
-        Jumping = 3,
-        Falling = 4
-    }
 
+    /**
+     * Assure that a Vector2 values do not go above boundaries values or below -boundaries values
+     */
     private Vector2 KeepVectorInBoundaries(Vector2 v, Vector2 boundaries)
     {
         var res = new Vector2();
@@ -195,15 +211,28 @@ public class newJumpWoPhysics : MonoBehaviour
         
         return res;
     }
-
+    
+    /**
+     * Round values of a Vector2 to a precision
+     */
     private Vector2 VectorRound(Vector2 v, int precision)
     {
         return new Vector2((float) Math.Round(v.x, precision), (float) Math.Round(v.y, precision));
     }
 
+    //////////////////////////////////////////////////////
+    ///                INIT & GAME LOOP 
+    //////////////////////////////////////////////////////
+
+    void Start()
+    {
+        Init();
+    }
+    
+    
     /**
-     * Init various parameters
-     */
+    * Initialize various parameters
+    */
     private void Init()
     {
         MaxSpeed = new Vector2(HorizontalMaxSpeed / 10, VerticalMaxSpeed / 10);
@@ -214,26 +243,85 @@ public class newJumpWoPhysics : MonoBehaviour
         Fall();
     }
     
-    void Start()
-    {
-        Init();
-    }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("A") && JumpsInARow < NumberOfJumps)
             Jump();
-        Run();
+        Move();
     }
 
+    
     private void LateUpdate()
     {
         Vector2 frameMovement = CalcSpeed();
         transform.Translate(frameMovement.x, frameMovement.y, 0);
         DecayJump();
     }
+    
+    //////////////////////////////////////////////////////
+    ///                MAIN ACTIONS
+    //////////////////////////////////////////////////////
 
+    /**
+     * Make the character jump
+     * Apply a upward force to the character, decaying over time
+     */
+    public void Jump()
+    {
+        Debug.Log("jump");
+        JumpsInARow++;
+        AddForce(Forces.Jumping, new Vector2(0, jumpStrength*10));
+    }
+
+    /**
+     * Make the character fall
+     * Apply a downward force similar to gravity
+     */
+    public void Fall()
+    {
+        AddForce(Forces.Falling, new Vector2(0, gravity * 2));
+    }
+
+    /**
+     * Transforms controller horizontal inputs to character movements
+     */
+    public void Move()
+    {
+        float horizontalAxis = Input.GetAxis("Horizontal");
+        Forces direction;
+
+        if (horizontalAxis < 0)
+        {
+            direction = Forces.GoLeft;
+            if (GetForce(Forces.GoRight).x > 0)
+                DecayMovement(Forces.GoRight);
+        }
+        else if (horizontalAxis > 0)
+        {
+            direction = Forces.GoRight;
+            if (GetForce(Forces.GoLeft).x > 0)
+                DecayMovement(Forces.GoLeft);
+        }
+        else {
+            DecayMovement(Forces.GoRight);
+            DecayMovement(Forces.GoLeft);
+            return;
+        }
+        
+        float forceToApply = CalculateHorizontalForce(horizontalAxis);
+        AddForce(direction, new Vector2(forceToApply, 0));
+    }
+    
+    //////////////////////////////////////////////////////
+    ///                CUSTOM PHYSICS
+    //////////////////////////////////////////////////////
+
+    /**
+     * Computes the sum of all the forces applied on the character, and returns the resulting speed.
+     * Takes care of all directions in 2D, plus deals with the mass of the character
+     */
     private Vector2 CalcSpeed()
     {
         var forceSum = Vector2.zero;
@@ -249,66 +337,60 @@ public class newJumpWoPhysics : MonoBehaviour
         var totalSpeed = VectorRound(KeepVectorInBoundaries(forceSpeed, maxSpeed), 3);
         return totalSpeed;
     }
-    
-    public void Jump()
-    {
-        JumpsInARow++;
-        AddForce(Forces.Jumping, new Vector2(0, jumpStrenght*10));
-    }
 
-    public void Run()
+    /**
+     * Create a force out of an horizontal input axis
+     */
+    private float CalculateHorizontalForce(float horizontalAxis)
     {
-        float horizontalAxis = Input.GetAxis("Horizontal");
-        Forces direction;
-
-        if (horizontalAxis < 0)
-        {
-            direction = Forces.GoLeft;
-            if (GetForce(Forces.GoRight).x > 0)
-                BackToZero(Forces.GoRight);
-        }
-        else if (horizontalAxis > 0)
-        {
-            direction = Forces.GoRight;
-            if (GetForce(Forces.GoLeft).x > 0)
-                BackToZero(Forces.GoLeft);
-        }
-        else {
-            BackToZero(Forces.GoRight);
-            BackToZero(Forces.GoLeft);
-            return;
-        }
-        
-        float forceToApply = CalculateHorizontalForce(horizontalAxis);
-        AddForce(direction, new Vector2(forceToApply, 0));
+        return acceleration * Math.Abs(horizontalAxis);
     }
     
-    private void BackToZero(Forces direction)
+    /**
+     * Simulate an end of movement inertia by decaying the movement force over time
+     */
+    private void DecayMovement(Forces direction)
     {
         float currentForce = GetForce(direction).x;
         float forceToApply = currentForce / baseInertia;
         AddForce(direction, new Vector2(- forceToApply, 0));
     }
 
+    /**
+    * Simulate a jump inertia by decaying the movement force over time
+    */
     private void DecayJump()
     {
         float jumpForce = GetForce(Forces.Jumping).y;
         if (jumpForce > 0)
         {
-            float forceToApply = jumpStrenght / JumpRound;
+            float forceToApply = jumpStrength / JumpRound;
             if (jumpForce - forceToApply < 0)
                 forceToApply = jumpForce;
             AddForce(Forces.Jumping, new Vector2(0, - forceToApply));
         }
     }
 
-    public float CalculateHorizontalForce(float horizontalAxis)
+    
+    //////////////////////////////////////////////////////
+    ///                JSON SERIALIZATION
+    //////////////////////////////////////////////////////
+    
+    /**
+     * Save the parameters of this script to a JSON file
+     */
+    public void SaveToJSON(string path)
     {
-        return acceleration * Math.Abs(horizontalAxis);
+        string lines = JsonUtility.ToJson(this, true);
+        System.IO.File.WriteAllText(path, lines);
     }
-
-    public void Fall()
+    
+    /**
+     * Load the parameters of this script from a JSON file
+     */
+    public static newJumpWoPhysics CreateFromJSON(string path)
     {
-        AddForce(Forces.Falling, new Vector2(0, gravity * 2));
+        return JsonUtility.FromJson<newJumpWoPhysics>(System.IO.File.ReadAllText(path));
     }
+    
 }
