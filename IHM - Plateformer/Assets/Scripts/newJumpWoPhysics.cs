@@ -76,6 +76,25 @@ public class newJumpWoPhysics : MonoBehaviour
     private float gravity;
     
     private Vector2 maxSpeed;
+    
+    
+    //AUDIO ASSETS
+    private AudioSource audioSource;
+    [SerializeField]
+    public AudioClip firstJumpSound;
+    
+    [SerializeField]
+    public AudioClip secondJumpSound;
+    
+    [SerializeField]
+    public AudioClip thirdJumpSound;
+    
+    [SerializeField]
+    public AudioClip fourthJumpSound;
+    
+    [SerializeField]
+    public AudioClip deathSound;
+
 
     /**
      * Dict where all the forces determining the final speed of the characters
@@ -237,6 +256,7 @@ public class newJumpWoPhysics : MonoBehaviour
     {
         MaxSpeed = new Vector2(HorizontalMaxSpeed / 10, VerticalMaxSpeed / 10);
         acceleration = acceleration / 10;
+        audioSource = GetComponent<AudioSource>();
         
         forceSummary = new Dictionary<int, Vector2>();
         
@@ -270,9 +290,33 @@ public class newJumpWoPhysics : MonoBehaviour
      */
     public void Jump()
     {
-        Debug.Log("jump");
         JumpsInARow++;
+        PlayJumpSound();
         AddForce(Forces.Jumping, new Vector2(0, jumpStrength*10));
+    }
+
+    public void PlayJumpSound()
+    {
+        AudioClip clip;
+        switch (JumpsInARow)
+        {
+            case 1:
+                clip = firstJumpSound;
+                break;
+            case 2:
+                clip = secondJumpSound;
+                break;
+            case 3:
+                clip = thirdJumpSound;
+                break;
+            case 4:
+            default:
+                clip = fourthJumpSound;
+                break;
+        }
+
+        Debug.Log("lalala");
+        audioSource.PlayOneShot(clip, 1);
     }
 
     /**
@@ -312,6 +356,16 @@ public class newJumpWoPhysics : MonoBehaviour
         
         float forceToApply = CalculateHorizontalForce(horizontalAxis);
         AddForce(direction, new Vector2(forceToApply, 0));
+    }
+
+    public void Die()
+    {
+        PlayDeathSound();
+    }
+
+    public void PlayDeathSound()
+    {
+        audioSource.PlayOneShot(deathSound, 1);
     }
     
     //////////////////////////////////////////////////////
