@@ -11,6 +11,7 @@
           <e p="MyInputManager.cs" t="Include" />
           <e p="newJump.cs" t="Include" />
           <e p="newJumpWoPhysics.cs" t="Include" />
+          <e p="PlayMusic.cs" t="Include" />
         </e>
       </e>
       <e p="IHM - Plateformer.sln" t="IncludeFlat" />

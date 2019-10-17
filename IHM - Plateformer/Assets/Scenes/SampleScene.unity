@@ -470,17 +470,11 @@ MonoBehaviour:
   jumpStrength: 9.56
   jumpRound: 2.81
   gravity: 9.7
-  audio: {fileID: 0}
   firstJumpSound: {fileID: 8300000, guid: df95a7cdedad9754c891f4a4142a8f08, type: 3}
   secondJumpSound: {fileID: 8300000, guid: 58517ccb01228b04f9aa771ae5525687, type: 3}
   thirdJumpSound: {fileID: 8300000, guid: f878f53d1907990418ce7f0ff90ff414, type: 3}
   fourthJumpSound: {fileID: 8300000, guid: 2d1ed75f7bad6bb4b944877adcc1ddca, type: 3}
-  landingSound: {fileID: 0}
-  coinLootSound: {fileID: 0}
-  chestLootSound: {fileID: 0}
-  colorWallPassThroughSound: {fileID: 0}
   deathSound: {fileID: 8300000, guid: 5e0fb8f332bac4b4bbbaf3a3c67f426d, type: 3}
-  wallCollisionSound: {fileID: 0}
 --- !u!212 &698382629
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1031,17 +1025,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1851158947}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5655c39631a760947a00546384a369f8, type: 3}
+  m_Script: {fileID: 11500000, guid: 82d662664ccd2a74d88de696fa1c4725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstJump: {fileID: 0}
-  secondJump: {fileID: 0}
-  thirdJump: {fileID: 0}
-  fourthJump: {fileID: 0}
-  coinLoot: {fileID: 0}
-  chestLoot: {fileID: 0}
-  colorWallPassThrough: {fileID: 0}
-  otherClip: {fileID: 8300000, guid: df95a7cdedad9754c891f4a4142a8f08, type: 3}
 --- !u!82 &1851158949
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1052,7 +1038,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 0c2f48ea53e0d214da4857deaaf7e0b9, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

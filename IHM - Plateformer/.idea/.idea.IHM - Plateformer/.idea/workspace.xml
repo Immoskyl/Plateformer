@@ -2,32 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="032df3ae-67ea-4510-906c-1dd631f6ad92" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/1stJump.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/1stJump.mp3.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/2ndJump.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/2ndJump.mp3.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/3rdJump.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/3rdJump.mp3.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/4thJump.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/4thJump.mp3.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/ChestLoot.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/ChestLoot.mp3.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/CoinLoot.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/CoinLoot.mp3.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/ColorWallPassThrough.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/ColorWallPassThrough.mp3.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Death.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Death.mp3.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Landing.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Landing.mp3.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/UnsuccesfulAction.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/UnsuccesfulAction.mp3.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/WallCOllision.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/WallCOllision.mp3.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.IHM - Plateformer/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.IHM - Plateformer/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.IHM - Plateformer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.IHM - Plateformer/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/newJumpWoPhysics.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/newJumpWoPhysics.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/CurrentLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/Library/CurrentLayout.dwlt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/InspectorExpandedItems.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Library/InspectorExpandedItems.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/StateCache/Hierarchy/43f735-mainStage.json" beforeDir="false" afterPath="$PROJECT_DIR$/Library/StateCache/Hierarchy/43f735-mainStage.json" afterDir="false" />
@@ -46,6 +23,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/newJumpWoPhysics.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayMusic.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/newJump.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ColorBall.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MyInputManager.cs" root0="FORCE_HIGHLIGHTING" />
@@ -60,6 +38,7 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/newJump.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SoundSystem.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/newJumpWoPhysics.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayMusic.cs" />
       </list>
     </option>
   </component>
@@ -123,7 +102,8 @@
       <workItem from="1571058531939" duration="9529000" />
       <workItem from="1571124030460" duration="30358000" />
       <workItem from="1571236847028" duration="564000" />
-      <workItem from="1571250933068" duration="3748000" />
+      <workItem from="1571250933068" duration="3901000" />
+      <workItem from="1571272668764" duration="240000" />
     </task>
     <task id="LOCAL-00001" summary="changes">
       <created>1571138068411</created>
@@ -160,7 +140,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571237071898</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="sound design for jumping and dying DONE">
+      <created>1571254855875</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1571254855875</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
@@ -186,7 +173,8 @@
     <MESSAGE value="double saut implémenté (nb de saut réglable)" />
     <MESSAGE value="serialization en JSON et commenting du code" />
     <MESSAGE value="Sound Assets created" />
-    <option name="LAST_COMMIT_MESSAGE" value="Sound Assets created" />
+    <MESSAGE value="sound design for jumping and dying DONE" />
+    <option name="LAST_COMMIT_MESSAGE" value="sound design for jumping and dying DONE" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
