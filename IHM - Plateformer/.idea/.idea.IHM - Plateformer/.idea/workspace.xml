@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="032df3ae-67ea-4510-906c-1dd631f6ad92" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.IHM - Plateformer/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.IHM - Plateformer/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.IHM - Plateformer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.IHM - Plateformer/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/CurrentLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/Library/CurrentLayout.dwlt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/InspectorExpandedItems.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Library/InspectorExpandedItems.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/StateCache/Hierarchy/43f735-mainStage.json" beforeDir="false" afterPath="$PROJECT_DIR$/Library/StateCache/Hierarchy/43f735-mainStage.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/assetDatabase3" beforeDir="false" afterPath="$PROJECT_DIR$/Library/assetDatabase3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -103,7 +96,7 @@
       <workItem from="1571124030460" duration="30358000" />
       <workItem from="1571236847028" duration="564000" />
       <workItem from="1571250933068" duration="3901000" />
-      <workItem from="1571272668764" duration="240000" />
+      <workItem from="1571272668764" duration="972000" />
     </task>
     <task id="LOCAL-00001" summary="changes">
       <created>1571138068411</created>
@@ -147,7 +140,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571254855875</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="background musicAdded">
+      <created>1571272963484</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1571272963484</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
@@ -174,7 +174,8 @@
     <MESSAGE value="serialization en JSON et commenting du code" />
     <MESSAGE value="Sound Assets created" />
     <MESSAGE value="sound design for jumping and dying DONE" />
-    <option name="LAST_COMMIT_MESSAGE" value="sound design for jumping and dying DONE" />
+    <MESSAGE value="background musicAdded" />
+    <option name="LAST_COMMIT_MESSAGE" value="background musicAdded" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
