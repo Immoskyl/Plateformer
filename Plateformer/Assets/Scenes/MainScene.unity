@@ -588,8 +588,9 @@ GameObject:
   - component: {fileID: 1705420088}
   - component: {fileID: 1705420093}
   - component: {fileID: 1705420092}
-  - component: {fileID: 1705420091}
   - component: {fileID: 1705420089}
+  - component: {fileID: 1705420094}
+  - component: {fileID: 1705420091}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -650,32 +651,102 @@ MonoBehaviour:
   blockMoveLeft: 0
   blockMoveRight: 0
   test: {x: 0, y: 0}
---- !u!61 &1705420091
-BoxCollider2D:
+--- !u!82 &1705420091
+AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1705420087}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!61 &1705420092
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -751,6 +822,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1705420094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705420087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ac480fe399480e4cb8707463d9eb424, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfJumps: 2
+  acceleration: 43.7
+  baseInertia: 3
+  mass: 4.06
+  verticalMaxSpeed: 6.5
+  horizontalMaxSpeed: 12
+  jumpStrength: 10
+  jumpRound: 2.13
+  gravity: 9.5
+  firstJumpSound: {fileID: 8300000, guid: df95a7cdedad9754c891f4a4142a8f08, type: 3}
+  secondJumpSound: {fileID: 8300000, guid: 58517ccb01228b04f9aa771ae5525687, type: 3}
+  thirdJumpSound: {fileID: 8300000, guid: f878f53d1907990418ce7f0ff90ff414, type: 3}
+  fourthJumpSound: {fileID: 8300000, guid: 2d1ed75f7bad6bb4b944877adcc1ddca, type: 3}
+  deathSound: {fileID: 8300000, guid: 5e0fb8f332bac4b4bbbaf3a3c67f426d, type: 3}
 --- !u!1001 &1802536071
 PrefabInstance:
   m_ObjectHideFlags: 0
