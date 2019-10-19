@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="032df3ae-67ea-4510-906c-1dd631f6ad92" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.IHM - Plateformer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.IHM - Plateformer/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="032df3ae-67ea-4510-906c-1dd631f6ad92" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +94,7 @@
       <workItem from="1571124030460" duration="30358000" />
       <workItem from="1571236847028" duration="564000" />
       <workItem from="1571250933068" duration="3901000" />
-      <workItem from="1571272668764" duration="972000" />
+      <workItem from="1571272668764" duration="1102000" />
     </task>
     <task id="LOCAL-00001" summary="changes">
       <created>1571138068411</created>
@@ -147,7 +145,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571272963484</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="background musicAdded">
+      <created>1571273873128</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1571273873128</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
