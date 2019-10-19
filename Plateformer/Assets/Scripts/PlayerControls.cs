@@ -42,10 +42,11 @@ public class PlayerControls : MonoBehaviour
 
     public Color color;
 
+    private MovementManager movementManager;
     // Start is called before the first frame update
     void Start()
     {
-        
+        MovementManager movementManager = GetComponent<MovementManager>();
     }
 
 
@@ -94,9 +95,12 @@ public class PlayerControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector2 frameMovement = movementManager.CalcSpeed();
+        movementManager.DecayJump();
+
         //Calcul des nouvelles positions
-        float newPositionX = transform.position.x + speed.x;
-        float newPositionY = transform.position.y + speed.y;
+        float newPositionX = transform.position.x + frameMovement.x;
+        float newPositionY = transform.position.y + frameMovement.y;
 
 
         //Vérification si le joueur peut se déplacer
@@ -109,17 +113,15 @@ public class PlayerControls : MonoBehaviour
         transform.position = new Vector2( newPositionX, newPositionY );
 
 
-        ///// Mise à jour de la vitesse //////
+        ///// Mise à jour du blocage //////
 
         if (Input.GetAxis("Horizontal") < 0)
         {
-            speed.x = speedMove * Input.GetAxis("Horizontal");
             if (blockMoveRight) blockMoveRight = false;
         }
 
         if (Input.GetAxis("Horizontal") > 0)
         {
-            speed.x = speedMove * Input.GetAxis("Horizontal");
             if (blockMoveLeft) blockMoveLeft = false;
         }
 
@@ -137,36 +139,16 @@ public class PlayerControls : MonoBehaviour
             speed.y = -speedFall;
         }
 
-        if (isJumping) jump(); 
-
-
         //Calcul des positions de la prochaine frame        
-        playerLeft = transform.position.x - transform.localScale.x / 2 + speed.x;
-        playerRight = transform.position.x + transform.localScale.x / 2 + speed.x;
-        playerUp = transform.position.y + transform.localScale.y / 2 + speed.y;
-        playerDown = transform.position.y - transform.localScale.y / 2 + speed.y;
+        playerLeft = transform.position.x - transform.localScale.x / 2 + frameMovement.x;
+        playerRight = transform.position.x + transform.localScale.x / 2 + frameMovement.x;
+        playerUp = transform.position.y + transform.localScale.y / 2 + frameMovement.y;
+        playerDown = transform.position.y - transform.localScale.y / 2 + frameMovement.y;
 
         //Mise à jour des mouvements déjà bloqués
         AbstractPlateform.upAlreadyBlocked = false;
         AbstractPlateform.downAlreadyBlocked = false;
         AbstractPlateform.leftAlreadyBlocked = false;
         AbstractPlateform.rightAlreadyBlocked = false;
-    }
-
-    public void jump()
-    {
-        if (jumpingCount <= heightJump)
-        {
-            jumpingCount++;
-            speed.y = speedMoveJump;
-        }
-
-        if (jumpingCount > heightJump || blockMoveUp)
-        {
-            jumpingCount = 0;
-            isJumping = false;
-            speed.y = 0;
-            if (blockMoveUp) blockMoveUp = false;
-        }
     }
 }
