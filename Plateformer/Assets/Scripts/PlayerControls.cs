@@ -37,8 +37,10 @@ public class PlayerControls : MonoBehaviour
 
     public bool blockMoveDown, blockMoveUp, blockMoveLeft, blockMoveRight;
 
-
     public Vector2 test;
+    public enum Color { Red, Blue, Yellow, Green, Purple }
+
+    public Color color;
 
     // Start is called before the first frame update
     void Start()
