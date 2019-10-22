@@ -409,6 +409,10 @@ public class MovementManager : MonoBehaviour
      */
     private void DecayMovement(Forces direction)
     {
+        //quickfix
+        AddForce(direction, new Vector2(- GetForce(direction).x, 0));
+        return;
+        
         float currentForce = GetForce(direction).x;
         float forceToApply = currentForce / baseInertia;
         AddForce(direction, new Vector2(- forceToApply, 0));
