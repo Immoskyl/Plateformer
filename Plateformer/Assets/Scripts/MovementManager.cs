@@ -412,10 +412,11 @@ public class MovementManager : MonoBehaviour
         //quickfix
         AddForce(direction, new Vector2(- GetForce(direction).x, 0));
         return;
-        
+        /*
         float currentForce = GetForce(direction).x;
         float forceToApply = currentForce / baseInertia;
         AddForce(direction, new Vector2(- forceToApply, 0));
+        */
     }
 
     /**

@@ -22,6 +22,7 @@ public class MusicPlayer : MonoBehaviour
     void Start()
     {
         activeMusic = music1;
+        ChangeMusic(activeMusic);
     }
 
     public void ChangeMusic(AudioSource a)
