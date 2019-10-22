@@ -26,6 +26,7 @@ public class MovementManager : MonoBehaviour
     /**
     * Jumps done in a row by the character
     */
+    [SerializeField]
     private int jumpsInARow;
     
     /**
@@ -76,24 +77,26 @@ public class MovementManager : MonoBehaviour
     private float gravity;
     
     private Vector2 maxSpeed;
-    
-    
+
+
     //AUDIO ASSETS
+    [SerializeField]
     private AudioSource audioSource;
-    [SerializeField]
-    public AudioClip firstJumpSound;
     
     [SerializeField]
-    public AudioClip secondJumpSound;
+    public AudioSource firstJumpSound;
     
     [SerializeField]
-    public AudioClip thirdJumpSound;
+    public AudioSource secondJumpSound;
     
     [SerializeField]
-    public AudioClip fourthJumpSound;
+    public AudioSource thirdJumpSound;
     
     [SerializeField]
-    public AudioClip deathSound;
+    public AudioSource fourthJumpSound;
+    
+    [SerializeField]
+    public AudioSource deathSound;
 
 
     /**
@@ -267,18 +270,11 @@ public class MovementManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("A") && JumpsInARow < NumberOfJumps)
+        if (Input.GetKeyDown("space") && JumpsInARow < NumberOfJumps)
             Jump();
         Move();
     }
 
-    
-    private void LateUpdate()
-    {
-        Vector2 frameMovement = CalcSpeed();
-        transform.Translate(frameMovement.x, frameMovement.y, 0);
-        DecayJump();
-    }
     
     //////////////////////////////////////////////////////
     ///                MAIN ACTIONS
@@ -295,28 +291,36 @@ public class MovementManager : MonoBehaviour
         AddForce(Forces.Jumping, new Vector2(0, jumpStrength*10));
     }
 
+    public void Reset_Jumps()
+    {
+        JumpsInARow = 0;
+    }
+
+    public void Jump_On_Wall()
+    {
+        JumpsInARow--;
+    }
+
     public void PlayJumpSound()
     {
-        AudioClip clip;
         switch (JumpsInARow)
         {
             case 1:
-                clip = firstJumpSound;
+                firstJumpSound.Play();
                 break;
             case 2:
-                clip = secondJumpSound;
+                secondJumpSound.Play();
                 break;
             case 3:
-                clip = thirdJumpSound;
+                thirdJumpSound.Play();
                 break;
             case 4:
+                fourthJumpSound.Play();
+                break;
             default:
-                clip = fourthJumpSound;
                 break;
         }
-
-        Debug.Log("lalala");
-        audioSource.PlayOneShot(clip, 1);
+//        Debug.Log("lalala");
     }
 
     /**
@@ -365,7 +369,7 @@ public class MovementManager : MonoBehaviour
 
     public void PlayDeathSound()
     {
-        audioSource.PlayOneShot(deathSound, 1);
+        deathSound.Play();
     }
     
     //////////////////////////////////////////////////////

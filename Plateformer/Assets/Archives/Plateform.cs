@@ -39,7 +39,7 @@ public class Plateform : MonoBehaviour
             if (playerControls.playerLeft < plateformLeft && playerControls.playerRight > plateformLeft)
             {
                 playerControls.blockMoveRight = true;
-                playerControls.position.x = plateformLeft - playerControls.transform.localScale.x / 2 - 0.008f;
+                playerControls.blockedPosition.x = plateformLeft - playerControls.transform.localScale.x / 2 - 0.008f;
                 rightAlreadyBlocked = true;
             }
 
@@ -47,7 +47,7 @@ public class Plateform : MonoBehaviour
             if (playerControls.playerRight > plateformRight && playerControls.playerLeft < plateformRight)
             {
                 playerControls.blockMoveLeft = true;
-                playerControls.position.x = plateformRight + 0.008f + playerControls.transform.localScale.x / 2;
+                playerControls.blockedPosition.x = plateformRight + 0.008f + playerControls.transform.localScale.x / 2;
                 leftAlreadyBlocked = true;
             }
         }
@@ -61,7 +61,7 @@ public class Plateform : MonoBehaviour
             if (playerControls.playerUp > plateformUp && playerControls.playerDown < plateformUp)
             {
                 playerControls.blockMoveDown = true;
-                playerControls.position.y = plateformUp + playerControls.transform.localScale.y / 2 + 0.008f;
+                playerControls.blockedPosition.y = plateformUp + playerControls.transform.localScale.y / 2 + 0.008f;
                 downAlreadyBlocked = true;
             }
 
@@ -70,7 +70,7 @@ public class Plateform : MonoBehaviour
             {
                 print("grougour");
                 playerControls.blockMoveUp = true;
-                playerControls.position.y = plateformDown - playerControls.transform.localScale.y / 2 - 0.008f;
+                playerControls.blockedPosition.y = plateformDown - playerControls.transform.localScale.y / 2 - 0.008f;
                 upAlreadyBlocked = true;
             }
         }

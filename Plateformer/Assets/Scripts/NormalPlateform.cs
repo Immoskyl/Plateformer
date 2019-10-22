@@ -33,16 +33,18 @@ public class NormalPlateform : AbstractPlateform
             if (playerControls.playerLeft < plateformLeft && playerControls.playerRight > plateformLeft)
             {
                 playerControls.blockMoveRight = true;
-                playerControls.position.x = plateformLeft - playerControls.transform.localScale.x / 2 - 0.008f;
+                playerControls.blockedPosition.x = plateformLeft - playerControls.transform.localScale.x / 2 - 0.008f;
                 rightAlreadyBlocked = true;
+                playerControls.Jump_On_Wall();
             }
 
             //quand le joueur arrive sur le côté droit de la plateform
             if (playerControls.playerRight > plateformRight && playerControls.playerLeft < plateformRight)
             {
                 playerControls.blockMoveLeft = true;
-                playerControls.position.x = plateformRight + 0.008f + playerControls.transform.localScale.x / 2;
+                playerControls.blockedPosition.x = plateformRight + 0.008f + playerControls.transform.localScale.x / 2 + 0.008f;
                 leftAlreadyBlocked = true;
+                playerControls.Jump_On_Wall();
             }
         }
 
@@ -55,8 +57,9 @@ public class NormalPlateform : AbstractPlateform
             if (playerControls.playerUp > plateformUp && playerControls.playerDown < plateformUp)
             {
                 playerControls.blockMoveDown = true;
-                playerControls.position.y = plateformUp + playerControls.transform.localScale.y / 2 + 0.008f;
+                playerControls.blockedPosition.y = plateformUp + playerControls.transform.localScale.y / 2 + 0.008f;
                 downAlreadyBlocked = true;
+                playerControls.Reset_Jumps();
             }
 
             //Quand le joueur arrive en dessous de la plateform
@@ -64,7 +67,7 @@ public class NormalPlateform : AbstractPlateform
             {
                 //print("grougour");
                 playerControls.blockMoveUp = true;
-                playerControls.position.y = plateformDown - playerControls.transform.localScale.y / 2 - 0.008f;
+                playerControls.blockedPosition.y = plateformDown - playerControls.transform.localScale.y / 2 - 0.008f;
                 upAlreadyBlocked = true;
             }
         }
