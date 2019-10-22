@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 7079229501441338548}
   - component: {fileID: 7079229501441338547}
   m_Layer: 0
-  m_Name: Player 1
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -237,7 +237,7 @@ MonoBehaviour:
   acceleration: 50
   baseInertia: 3
   mass: 4.06
-  verticalMaxSpeed: 6.5
+  verticalMaxSpeed: 2.3
   horizontalMaxSpeed: 1.6
   jumpStrength: 12
   jumpRound: 2.13
