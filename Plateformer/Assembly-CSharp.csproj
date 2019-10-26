@@ -61,6 +61,8 @@
      <Compile Include="Assets\Archives\PlayMusic.cs" />
      <Compile Include="Assets\Archives\SafePlayerCollider.cs" />
      <Compile Include="Assets\Scripts\AbstractPlateform.cs" />
+     <Compile Include="Assets\Scripts\Menu\ChooseLevels.cs" />
+     <Compile Include="Assets\Scripts\Menu\CursorManager.cs" />
      <Compile Include="Assets\Scripts\MovementManager.cs" />
      <Compile Include="Assets\Scripts\MusicPlayer.cs" />
      <Compile Include="Assets\Scripts\NormalPlateform.cs" />
