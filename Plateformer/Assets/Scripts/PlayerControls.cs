@@ -33,9 +33,18 @@ public class PlayerControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log("doc");
         //Calcul des nouvelles positions
-        float newPositionX = transform.position.x + speed.x;
-        float newPositionY = transform.position.y + speed.y;
+
+
+
+
+    }
+
+    private void LateUpdate()
+    {
+        float newPositionX = transform.localPosition.x + speed.x;
+        float newPositionY = transform.localPosition.y + speed.y;
 
 
         //Vérification si le joueur peut se déplacer
@@ -44,44 +53,45 @@ public class PlayerControls : MonoBehaviour
         if (blockMoveRight && blockedPosition.x < newPositionX || blockMoveLeft && blockedPosition.x > newPositionX) newPositionX = blockedPosition.x;
 
 
+        //Saut mural
+        movementManager.Jump_On_Wall((blockMoveRight || blockMoveLeft) && !blockMoveDown);
+
+
         //Modification de la position
-        transform.position = new Vector2(newPositionX, newPositionY);
+        transform.localPosition = new Vector2(newPositionX, newPositionY);
 
-
-
+        
         ///// Mise à jour de la vitesse /////
         speed = movementManager.CalcSpeed();
         movementManager.DecayJump();
 
+
         //Mise à jour du blocage
+        /*
         if (speed.x < 0 && blockMoveRight) blockMoveRight = false;
         if (speed.x > 0 && blockMoveLeft) blockMoveLeft = false;
         if (speed.y > 0 && blockMoveDown) blockMoveDown = false;
         if (speed.y < 0 && blockMoveUp) blockMoveUp = false;
+        */
 
 
         //Calcul des positions de la prochaine frame        
-        playerLeft = transform.position.x - transform.localScale.x / 2 + speed.x;
-        playerRight = transform.position.x + transform.localScale.x / 2 + speed.x;
-        playerUp = transform.position.y + transform.localScale.y / 2 + speed.y;
-        playerDown = transform.position.y - transform.localScale.y / 2 + speed.y;
+        playerLeft = transform.localPosition.x - transform.localScale.x / 2 + speed.x;
+        playerRight = transform.localPosition.x + transform.localScale.x / 2 + speed.x;
+        playerUp = transform.localPosition.y + transform.localScale.y / 2 + speed.y;
+        playerDown = transform.localPosition.y - transform.localScale.y / 2 + speed.y;
 
+        blockMoveRight = false;
+        blockMoveLeft = false;
+        blockMoveDown = false;
+        blockMoveUp = false;
 
-        //Mise à jour des mouvements déjà bloqués
-        AbstractPlateform.upAlreadyBlocked = false;
-        AbstractPlateform.downAlreadyBlocked = false;
-        AbstractPlateform.leftAlreadyBlocked = false;
-        AbstractPlateform.rightAlreadyBlocked = false;
+        //  transform.SetParent(null);
     }
 
     public void Reset_Jumps()
     {
         movementManager.Reset_Jumps();
-    }
-
-    public void Jump_On_Wall()
-    {
-        movementManager.Jump_On_Wall();
     }
 
     ////ARCHIVES////

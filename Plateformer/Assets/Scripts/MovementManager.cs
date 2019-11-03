@@ -28,7 +28,13 @@ public class MovementManager : MonoBehaviour
     */
     [SerializeField]
     private int jumpsInARow;
-    
+
+    /**
+    * Jumps after touched a wall
+    */
+    [SerializeField]
+    private int wallJumps;
+
     /**
      * Value of the character running in the left of right direction
      */
@@ -270,7 +276,7 @@ public class MovementManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("space") && JumpsInARow < NumberOfJumps)
+        if (Input.GetKeyDown("space") && JumpsInARow < NumberOfJumps + wallJumps)
             Jump();
         Move();
     }
@@ -296,9 +302,10 @@ public class MovementManager : MonoBehaviour
         JumpsInARow = 0;
     }
 
-    public void Jump_On_Wall()
+    public int Jump_On_Wall(bool _bool)
     {
-        JumpsInARow--;
+        if (_bool) return wallJumps;
+        else return 0;
     }
 
     public void PlayJumpSound()

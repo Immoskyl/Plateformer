@@ -4,29 +4,64 @@ using UnityEngine;
 
 public abstract class AbstractPlateform : MonoBehaviour
 {
-    public static bool rightAlreadyBlocked, leftAlreadyBlocked, downAlreadyBlocked, upAlreadyBlocked;
 
+    public bool movingPlateform;
+    public Vector2 speed;
+
+    
     public PlayerControls playerControls;
+    public bool isPlayerNear;
 
-    public enum PlateformColor { Red, Blue, Yellow, Green, Purple}
+    public PlayerControls.Color plateformColor;
 
-    public PlateformColor plateformColor;
+    public Sprite redSprite;
+    public Sprite blueSprite;
+    public Sprite yellowSprite;
+    public Sprite greenSprite;
+    public Sprite purpleSprite;
 
     public abstract void Update_Block_Moves();
 
-    //public Vector2 test;
+    public Vector2 test;
 
     private void OnTriggerStay2D(Collider2D collision)
+    {/*
+        Debug.Log("hello");
+        
+        if (collision.gameObject.tag == "Player")
+        {
+
+            playerControls = collision.gameObject.GetComponent<PlayerControls>();
+
+            if (plateformColor == playerControls.color)
+            {
+                Update_Block_Moves();
+                //Update_Unblock_Moves();
+            }
+        }*/
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
+            
             playerControls = collision.gameObject.GetComponent<PlayerControls>();
-            Update_Block_Moves();
-            Update_Unblock_Moves();
+            isPlayerNear = true;
+
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            playerControls = null;
+            isPlayerNear = false;
+        }
+    }
 
+    /*
     private void Update_Unblock_Moves()
     {
         //Positions du joueur à la frame d'après
@@ -34,8 +69,6 @@ public abstract class AbstractPlateform : MonoBehaviour
         float plateformRight = transform.position.x + transform.localScale.x / 2;
         float plateformUp = transform.position.y + transform.localScale.y / 2;
         float plateformDown = transform.position.y - transform.localScale.y / 2;
-
-        print("spaguet");
 
         //Quand le joueur arrive au dessus de la plateform
         if (!(playerControls.playerDown > plateformUp) && !downAlreadyBlocked)
@@ -61,10 +94,37 @@ public abstract class AbstractPlateform : MonoBehaviour
             playerControls.blockMoveUp = false;
         }
     }
+    */
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void changeColor(PlayerControls.Color _color)
     {
+        if (_color != plateformColor)
+        {
+            plateformColor = _color;
+            switch (_color)
+            {
+                case PlayerControls.Color.Red :
+                    GetComponent<SpriteRenderer>().sprite = redSprite;
+                    break;
 
+                case PlayerControls.Color.Blue:
+                    GetComponent<SpriteRenderer>().sprite = blueSprite;
+                    break;
+
+                case PlayerControls.Color.Yellow:
+                    GetComponent<SpriteRenderer>().sprite = yellowSprite;
+                    break;
+
+                case PlayerControls.Color.Green:
+                    GetComponent<SpriteRenderer>().sprite = greenSprite;
+                    break;
+
+                case PlayerControls.Color.Purple:
+                    GetComponent<SpriteRenderer>().sprite = purpleSprite;
+                    break;
+            }
+                 
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -75,11 +135,7 @@ public abstract class AbstractPlateform : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (playerControls != null)
-        {
-            GameObject player = playerControls.gameObject;
-        }
-    }
+
+
+
 }
