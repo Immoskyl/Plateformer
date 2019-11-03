@@ -105,13 +105,13 @@ public class NormalPlateform : AbstractPlateform
                     {
                         if (playerControls.blockedPosition.y < plateformUp + playerControls.transform.localScale.y / 2 + 0.008f)
                         {
-                            if (movingPlateform) playerControls.gameObject.transform.SetParent(transform);
+                            //if (movingPlateform) playerControls.gameObject.transform.SetParent(transform);
                             playerControls.blockedPosition.y = plateformUp + playerControls.transform.localScale.y / 2 + 0.008f;
                         }
                     }
                     else
                     {
-                        if (movingPlateform) playerControls.gameObject.transform.SetParent(transform);
+                        //if (movingPlateform) playerControls.gameObject.transform.SetParent(transform);
                         playerControls.blockMoveDown = true;
                         playerControls.blockedPosition.y = plateformUp + playerControls.transform.localScale.y / 2 + 0.008f;
                         playerControls.Reset_Jumps();
