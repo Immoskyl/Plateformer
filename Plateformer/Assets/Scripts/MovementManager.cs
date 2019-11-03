@@ -87,9 +87,6 @@ public class MovementManager : MonoBehaviour
 
     //AUDIO ASSETS
     [SerializeField]
-    private AudioSource audioSource;
-    
-    [SerializeField]
     public AudioSource firstJumpSound;
     
     [SerializeField]
@@ -265,7 +262,6 @@ public class MovementManager : MonoBehaviour
     {
         MaxSpeed = new Vector2(HorizontalMaxSpeed / 10, VerticalMaxSpeed / 10);
         acceleration = acceleration / 10;
-        audioSource = GetComponent<AudioSource>();
         
         forceSummary = new Dictionary<int, Vector2>();
         
@@ -416,9 +412,14 @@ public class MovementManager : MonoBehaviour
      */
     private void DecayMovement(Forces direction)
     {
+        //quickfix
+        AddForce(direction, new Vector2(- GetForce(direction).x, 0));
+        return;
+        /*
         float currentForce = GetForce(direction).x;
         float forceToApply = currentForce / baseInertia;
         AddForce(direction, new Vector2(- forceToApply, 0));
+        */
     }
 
     /**
