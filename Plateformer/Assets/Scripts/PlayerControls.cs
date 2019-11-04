@@ -4,20 +4,55 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
-    public Vector2 blockedPosition;
-    public Vector2 speed;
+    public enum Color { Red, Blue, Yellow, Green, Neutre }
 
-    public bool isOnPlateform;
-    public bool isJumping;
+    //couleur de la plateform
+    private Color _color;
 
-    public double playerLeft, playerRight, playerUp, playerDown;
+    //Valeur des positions que le joueur ne peut dépasser lorsqu'il est bloqué
+    private Vector2 _blockedPosition;
 
+    //vitesse du joueur
+    private Vector2 _speed;
+
+
+    //true ssi le joueur est en train de sauter
+    private bool _isJumping;
+
+    public Vector2 blockedPosition
+    {
+        get { return _blockedPosition; }
+        set { blockedPosition = value; }
+    }
+    
+    public Vector2 speed
+    {
+        get { return _speed; }
+        set { _speed = value; }
+    }    
+    
+    public bool isJumping
+    {
+        get { return _isJumping; }
+        set { _isJumping = value; }
+    }
+
+    public Color color
+    {
+        get { return _color; }
+        set { _color = value; }
+    }
+
+    //extrémités gauche droite haute et basse du joueur à la prochaine frame
+    [HideInInspector]
+    public float playerLeft, playerRight, playerUp, playerDown;
+
+    //Le joueur est bloqué et ne peut plus aller plus loin vers le bas, le haut, la gauche, la droite
+    [HideInInspector]
     public bool blockMoveDown, blockMoveUp, blockMoveLeft, blockMoveRight;
 
-    public enum Color { Red, Blue, Yellow, Green, Purple }
-
-    public Color color;
-
+    //script qui gère les mouvements du joueur
+    [HideInInspector]
 
     public MovementManager movementManager;
 
@@ -65,6 +100,9 @@ public class PlayerControls : MonoBehaviour
         speed = movementManager.CalcSpeed();
         movementManager.DecayJump();
 
+        //Permet de savoir si le joueur saute
+        if (blockMoveDown) isJumping = false;
+        else isJumping = true;
 
         //Calcul des positions de la prochaine frame        
         playerLeft = pos.x - scale.x / 2 + speed.x;
@@ -72,12 +110,12 @@ public class PlayerControls : MonoBehaviour
         playerUp = pos.y + scale.y / 2 + speed.y;
         playerDown = pos.y - scale.y / 2 + speed.y;
 
+
+        //Mise à jour du blocage
         blockMoveRight = false;
         blockMoveLeft = false;
         blockMoveDown = false;
         blockMoveUp = false;
-
-        //  transform.SetParent(null);
     }
 
     public void Reset_Jumps()

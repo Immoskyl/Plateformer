@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class NormalPlateform : AbstractPlateform
 {
+    //Savoir si la plateform est traversable depuis le bas
     public bool traversable;
+    
     // Update is called once per frame
     void Update()
     {
@@ -26,14 +28,11 @@ public class NormalPlateform : AbstractPlateform
         float currentPlateformUp = pos.y + scale.y / 2;
         float currentPlateformDown = pos.y - scale.y / 2;
 
+        //position de la plateform à la frame d'après
         float plateformLeft = currentPlateformLeft - Time.deltaTime * speed.x;
         float plateformRight = currentPlateformRight + Time.deltaTime * speed.x;
         float plateformUp = currentPlateformUp + Time.deltaTime * speed.y;
         float plateformDown = currentPlateformDown - Time.deltaTime * speed.y;
-
-
-        test.x = plateformLeft;
-        test.y = plateformDown;
 
         var playerPos = playerControls.transform.localPosition;
         var playerScale = playerControls.transform.localScale;
@@ -43,16 +42,17 @@ public class NormalPlateform : AbstractPlateform
         float currentPlayerDown = playerPos.y - playerScale.y / 2;
         float currentPlayerUP = playerPos.y + playerScale.y / 2;
 
-        //quand le joueur est sur le coté de la plateform
-
+        //quand le joueur est dans la zone à gauche ou à droite de la plateforme à la frame courante
         if (currentPlayerRight <= currentPlateformLeft || currentPlayerLeft >= currentPlateformRight)
         {
-            if ((currentPlateformDown < currentPlayerDown && currentPlayerDown < currentPlateformUp)
-                || (currentPlateformDown < currentPlayerUP && currentPlayerDown < currentPlateformUp))
+            //si le joueur est sur un des côtés et qu'il est à un y susceptible de collider avec la plateforme
+            if ((currentPlateformDown < currentPlayerDown && currentPlayerDown < currentPlateformUp) || (currentPlateformDown < currentPlayerUP && currentPlayerDown < currentPlateformUp)
+            || (((plateformDown < playerControls.playerDown && playerControls.playerDown < plateformUp) || (plateformDown < playerControls.playerUp && playerControls.playerUp < plateformUp)) && playerControls.isJumping))
             {
-                //quand le joueur arrive sur le côté gauche de la plateform
+                //quand le joueur arrive sur trop loin sur le côté gauche de la plateform à la frame d'après
                 if (currentPlayerRight <= currentPlateformLeft && playerControls.playerRight > plateformLeft)
                 {
+                    //Permet de savoir si le joueur est déjà bloqué par une plateforme légèrement plus à gauche
                     if (playerControls.blockMoveRight)
                     {
                         if (playerControls.blockedPosition.x > plateformLeft - playerControls.transform.localScale.x / 2 - 0.008f) 
@@ -66,9 +66,10 @@ public class NormalPlateform : AbstractPlateform
                     }
                 }
 
-                //quand le joueur arrive sur le côté droit de la plateform
+                //quand le joueur arrive trop loin sur le côté droit de la plateform à la frame d'après
                 if (currentPlayerLeft >= currentPlateformRight && playerControls.playerLeft < plateformRight)
                 {
+                    //Permet de savoir si le joueur est déjà bloqué par une plateforme légèrement plus à droite
                     if (playerControls.blockMoveLeft)
                     {
                         if (playerControls.blockedPosition.x < plateformRight + playerControls.transform.localScale.x / 2 + 0.008f)
@@ -85,38 +86,38 @@ public class NormalPlateform : AbstractPlateform
 
         }
 
+        //quand le joueur est dans la zone au dessus ou en dessous de la plateforme à la frame courante
         else if (currentPlayerDown >= currentPlateformUp || currentPlayerUP <= currentPlateformDown)
         {
-            //Quand le joueur est au dessus ou en dessous de la plateform
-            if ((plateformLeft < currentPlayerLeft && currentPlayerLeft < plateformRight)
-                || (plateformLeft < currentPlayerRight && currentPlayerRight < plateformRight))
+            //Quand le joueur est au dessus ou en dessous de la plateform et qu'il est susceptible de collider avec
+            if ((currentPlateformLeft < currentPlayerLeft && currentPlayerLeft < currentPlateformRight)
+                || (currentPlateformLeft < currentPlayerRight && currentPlayerRight < currentPlateformRight))
             {
-                //Quand le joueur arrive au dessus de la plateform
+                //Quand le joueur arrive trop bas au dessus de la plateform à la frame d'après
                 if (currentPlayerDown >= currentPlateformUp && playerControls.playerDown < plateformUp)
                 {
-                   // print("ok");
+                    //Permet de savoir si le joueur est déjà bloqué par une plateforme légèrement plus haute
                     if (playerControls.blockMoveDown)
                     {
                         if (playerControls.blockedPosition.y < plateformUp + playerControls.transform.localScale.y / 2 + 0.008f)
                         {
-                            //if (movingPlateform) playerControls.gameObject.transform.SetParent(transform);
                             playerControls.blockedPosition.y = plateformUp + playerControls.transform.localScale.y / 2 + 0.008f;
                         }
                     }
                     else
                     {
-                        //if (movingPlateform) playerControls.gameObject.transform.SetParent(transform);
                         playerControls.blockMoveDown = true;
                         playerControls.blockedPosition.y = plateformUp + playerControls.transform.localScale.y / 2 + 0.008f;
                         playerControls.Reset_Jumps();
                     }
                 }
 
-                //Quand le joueur arrive en dessous de la plateform
+                //Quand le joueur arrive trop haut en dessous de la plateform à la frame d'après
                 if (!traversable)
                 {
                     if (currentPlayerUP <= currentPlateformDown && playerControls.playerUp > plateformDown)
                     {
+                        //Permet de savoir si le joueur est déjà bloqué par une plateforme légèrement plus basse
                         if (playerControls.blockMoveUp)
                         {
                             if (playerControls.blockedPosition.y > plateformDown - playerControls.transform.localScale.y / 2 - 0.008f)
