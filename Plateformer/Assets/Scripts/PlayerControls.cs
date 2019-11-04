@@ -67,7 +67,6 @@ public class PlayerControls : MonoBehaviour
         set => isYellowUnlocked = value;
     }
 
-
     private void LateUpdate()
     {
         float newPositionX = transform.localPosition.x + speed.x;

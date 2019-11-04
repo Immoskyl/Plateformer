@@ -69,19 +69,25 @@ public class GiveBonus : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (checkpoint != null)
-            UpdateCheckpoint();
-        
-        if (doWeGiveJump)
-            GiveJumps(1);
-        
-        if (doWeGiveBlue)
-            GiveBlue();
-        
-        if (doWeGiveYellow)
-            GiveYellow();
-        
-        Destroy(this.gameObject);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            if (checkpoint != null)
+                UpdateCheckpoint();
+
+            if (doWeGiveJump)
+                GiveJumps(1);
+
+            if (doWeGiveBlue)
+                GiveBlue();
+
+            if (doWeGiveYellow)
+                GiveYellow();
+
+            Destroy(this.gameObject);
+        }
+    }
 }

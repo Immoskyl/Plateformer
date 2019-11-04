@@ -117,7 +117,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 246394133930001301}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -142,9 +142,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3d6da01f426fb44b5317af5534e253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerControls: {fileID: 0}
   plateformColor: 0
   redSprite: {fileID: 21300000, guid: 89ec64669e7cd7a48bab7806a994910e, type: 3}
   blueSprite: {fileID: 21300000, guid: 89ec64669e7cd7a48bab7806a994910e, type: 3}
   yellowSprite: {fileID: 21300000, guid: 89ec64669e7cd7a48bab7806a994910e, type: 3}
   greenSprite: {fileID: 21300000, guid: 89ec64669e7cd7a48bab7806a994910e, type: 3}
-  purpleSprite: {fileID: 21300000, guid: 89ec64669e7cd7a48bab7806a994910e, type: 3}
+  neutreSprite: {fileID: 0}
+  traversable: 0

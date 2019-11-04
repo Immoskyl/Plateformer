@@ -377,7 +377,8 @@ public class MovementManager : MonoBehaviour
 
     public void Die()
     {
-        GetComponent<Transform>().localPosition = checkpointPos;
+        transform.localPosition = checkpointPos;
+        //GetComponent<Transform>().localPosition = checkpointPos;
         PlayDeathSound();
         GetComponent<CameraShake>().TriggerShake();
     }
