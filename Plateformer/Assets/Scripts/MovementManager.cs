@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 
 public class MovementManager : MonoBehaviour
@@ -81,6 +82,11 @@ public class MovementManager : MonoBehaviour
     [SerializeField]
     [Range(0.1f, 20)]
     private float gravity;
+
+    [SerializeField]
+    private GameObject checkpoint;
+    
+    private Vector2 checkpointPos;
     
     private Vector2 maxSpeed;
 
@@ -180,6 +186,12 @@ public class MovementManager : MonoBehaviour
         set => maxSpeed = value;
     }
 
+    public Vector2 CheckpointPos
+    {
+        get => checkpointPos;
+        set => checkpointPos = value;
+    }
+
     //////////////////////////////////////////////////////
     ///                UTILS
     //////////////////////////////////////////////////////
@@ -264,6 +276,8 @@ public class MovementManager : MonoBehaviour
         acceleration = acceleration / 10;
         
         forceSummary = new Dictionary<int, Vector2>();
+
+        CheckpointPos = checkpoint.transform.position;
         
         Fall();
     }
@@ -291,7 +305,7 @@ public class MovementManager : MonoBehaviour
         AddForce(Forces.Jumping, new Vector2(0, jumpStrength*10));
     }
 
-    public void Reset_Jumps()
+    public void ResetJumps()
     {
         JumpsInARow = 0;
     }
@@ -320,7 +334,6 @@ public class MovementManager : MonoBehaviour
             default:
                 break;
         }
-//        Debug.Log("lalala");
     }
 
     /**
@@ -364,8 +377,9 @@ public class MovementManager : MonoBehaviour
 
     public void Die()
     {
-        //PlayDeathSound();
-        Debug.Log("Die");
+        GetComponent<Transform>().localPosition = checkpointPos;
+        PlayDeathSound();
+        GetComponent<CameraShake>().TriggerShake();
     }
 
     public void PlayDeathSound()

@@ -6,23 +6,27 @@ public class NormalPlateform : AbstractPlateform
 {
     //Savoir si la plateform est traversable depuis le bas
     public bool traversable;
-
+    
     // Update is called once per frame
     void Update()
     {
         if (isPlayerNear)
         {
-            if (plateformColor == playerControls.color) Update_Block_Moves();
+            if (plateformColor == playerControls.color) 
+                Update_Block_Moves();
         }
     }
 
     public override void Update_Block_Moves()
     {
-        //Positions de la plateform à la frame courante
-        float currentPlateformLeft = transform.position.x - transform.localScale.x / 2;
-        float currentPlateformRight = transform.position.x + transform.localScale.x / 2;
-        float currentPlateformUp = transform.position.y + transform.localScale.y / 2;
-        float currentPlateformDown = transform.position.y - transform.localScale.y / 2;
+        var pos = transform.position;
+        var scale = transform.localScale;
+        
+        //Positions de la plateform à la frame d'après
+        float currentPlateformLeft = pos.x - scale.x / 2;
+        float currentPlateformRight = pos.x + scale.x / 2;
+        float currentPlateformUp = pos.y + scale.y / 2;
+        float currentPlateformDown = pos.y - scale.y / 2;
 
         //position de la plateform à la frame d'après
         float plateformLeft = currentPlateformLeft - Time.deltaTime * speed.x;
@@ -30,11 +34,13 @@ public class NormalPlateform : AbstractPlateform
         float plateformUp = currentPlateformUp + Time.deltaTime * speed.y;
         float plateformDown = currentPlateformDown - Time.deltaTime * speed.y;
 
-        //position du joueur à la frame courante
-        float currentPlayerLeft = playerControls.transform.localPosition.x - playerControls.transform.localScale.x / 2;
-        float currentPlayerRight = playerControls.transform.localPosition.x + playerControls.transform.localScale.x / 2;
-        float currentPlayerDown = playerControls.transform.localPosition.y - playerControls.transform.localScale.y / 2;
-        float currentPlayerUP = playerControls.transform.localPosition.y + playerControls.transform.localScale.y / 2;
+        var playerPos = playerControls.transform.localPosition;
+        var playerScale = playerControls.transform.localScale;
+        
+        float currentPlayerLeft = playerPos.x - playerScale.x / 2;
+        float currentPlayerRight = playerPos.x + playerScale.x / 2;
+        float currentPlayerDown = playerPos.y - playerScale.y / 2;
+        float currentPlayerUP = playerPos.y + playerScale.y / 2;
 
         //quand le joueur est dans la zone à gauche ou à droite de la plateforme à la frame courante
         if (currentPlayerRight <= currentPlateformLeft || currentPlayerLeft >= currentPlateformRight)
@@ -42,7 +48,6 @@ public class NormalPlateform : AbstractPlateform
             //si le joueur est sur un des côtés et qu'il est à un y susceptible de collider avec la plateforme
             if ((currentPlateformDown < currentPlayerDown && currentPlayerDown < currentPlateformUp) || (currentPlateformDown < currentPlayerUP && currentPlayerDown < currentPlateformUp)
             || (((plateformDown < playerControls.playerDown && playerControls.playerDown < plateformUp) || (plateformDown < playerControls.playerUp && playerControls.playerUp < plateformUp)) && playerControls.isJumping))
-
             {
                 //quand le joueur arrive sur trop loin sur le côté gauche de la plateform à la frame d'après
                 if (currentPlayerRight <= currentPlateformLeft && playerControls.playerRight > plateformLeft)
