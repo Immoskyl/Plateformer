@@ -47,6 +47,7 @@ public class GiveBonus : MonoBehaviour
     private void UpdateCheckpoint()
     {
         checkpoint.transform.position = transform.position;
+        player.GetComponent<MovementManager>().CheckpointPos = checkpoint.transform.position;
     }
 
     /**
