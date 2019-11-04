@@ -284,7 +284,7 @@ public class MovementManager : MonoBehaviour
     
     public void MovePlayer() 
     {
-        if (Input.GetKeyDown("space") && JumpsInARow < NumberOfJumps + wallJumps)
+        if (Input.GetKeyDown("space") && JumpsInARow < NumberOfJumps)
             Jump();
         Move();
     }

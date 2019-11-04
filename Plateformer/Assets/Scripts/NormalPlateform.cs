@@ -6,6 +6,8 @@ public class NormalPlateform : AbstractPlateform
 {
     //Savoir si la plateform est traversable depuis le bas
     public bool traversable;
+
+ 
     
     // Update is called once per frame
     void Update()
@@ -15,6 +17,22 @@ public class NormalPlateform : AbstractPlateform
             if (plateformColor == playerControls.color) 
                 Update_Block_Moves();
         }
+    }
+    
+    public void On_Wall_Jump()
+    {
+        /*
+        playerControls.isOnWall = true;
+
+        if (playerControls.canStayOnWall)
+        { 
+            playerControls.blockMoveDown = true;
+            playerControls.blockedPosition.y = playerControls.transform.localPosition.y;
+            if (playerControls.movementManager.GetForce(MovementManager.Forces.Jumping) != Vector2.zero) playerControls.movementManager.RemoveForce(MovementManager.Forces.Jumping);
+        }
+        */
+        playerControls.blockMoveDown = true;
+        playerControls.blockedPosition.y = playerControls.transform.localPosition.y;
     }
 
     public override void Update_Block_Moves()
@@ -47,9 +65,10 @@ public class NormalPlateform : AbstractPlateform
         {
             //si le joueur est sur un des côtés et qu'il est à un y susceptible de collider avec la plateforme
             if ((currentPlateformDown < currentPlayerDown && currentPlayerDown < currentPlateformUp) || (currentPlateformDown < currentPlayerUP && currentPlayerDown < currentPlateformUp)
-            || (((plateformDown < playerControls.playerDown && playerControls.playerDown < plateformUp) || (plateformDown < playerControls.playerUp && playerControls.playerUp < plateformUp)) && playerControls.isJumping))
+            || (((plateformDown < playerControls.playerDown && playerControls.playerDown < plateformUp) || (plateformDown < playerControls.playerUp && playerControls.playerUp < plateformUp)) && !playerControls.isOnPlateform))
             {
                 //quand le joueur arrive sur trop loin sur le côté gauche de la plateform à la frame d'après
+                /////// LEFT COLLIDER ENTER ///////
                 if (currentPlayerRight <= currentPlateformLeft && playerControls.playerRight > plateformLeft)
                 {
                     //Permet de savoir si le joueur est déjà bloqué par une plateforme légèrement plus à gauche
@@ -63,11 +82,14 @@ public class NormalPlateform : AbstractPlateform
                     {
                         playerControls.blockedPosition.x = plateformLeft - playerControls.transform.localScale.x / 2 - 0.008f;
                         playerControls.blockMoveRight = true;
+                        playerControls.Reset_Jumps();
                     }
+                    On_Wall_Jump();
                 }
 
                 //quand le joueur arrive trop loin sur le côté droit de la plateform à la frame d'après
-                if (currentPlayerLeft >= currentPlateformRight && playerControls.playerLeft < plateformRight)
+                /////// RIGHT COLLIDER ENTER ///////
+                else if (currentPlayerLeft >= currentPlateformRight && playerControls.playerLeft < plateformRight)
                 {
                     //Permet de savoir si le joueur est déjà bloqué par une plateforme légèrement plus à droite
                     if (playerControls.blockMoveLeft)
@@ -80,7 +102,15 @@ public class NormalPlateform : AbstractPlateform
                     {
                         playerControls.blockMoveLeft = true;
                         playerControls.blockedPosition.x = plateformRight + playerControls.transform.localScale.x / 2 + 0.008f;
+                        playerControls.Reset_Jumps();
                     }
+                    On_Wall_Jump();
+                }
+
+                //quand le joueur est la mais pas trop loin
+                else
+                {
+                    //playerControls.isOnWall = false;
                 }
             }
 
@@ -93,7 +123,9 @@ public class NormalPlateform : AbstractPlateform
             if ((currentPlateformLeft < currentPlayerLeft && currentPlayerLeft < currentPlateformRight)
                 || (currentPlateformLeft < currentPlayerRight && currentPlayerRight < currentPlateformRight))
             {
+
                 //Quand le joueur arrive trop bas au dessus de la plateform à la frame d'après
+                /////// UP COLLIDER ENTER ///////
                 if (currentPlayerDown >= currentPlateformUp && playerControls.playerDown < plateformUp)
                 {
                     //Permet de savoir si le joueur est déjà bloqué par une plateforme légèrement plus haute
@@ -115,6 +147,7 @@ public class NormalPlateform : AbstractPlateform
                 //Quand le joueur arrive trop haut en dessous de la plateform à la frame d'après
                 if (!traversable)
                 {
+                    /////// DOWN COLLIDER ENTER ///////
                     if (currentPlayerUP <= currentPlateformDown && playerControls.playerUp > plateformDown)
                     {
                         //Permet de savoir si le joueur est déjà bloqué par une plateforme légèrement plus basse
