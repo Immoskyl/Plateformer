@@ -124,8 +124,10 @@ MonoBehaviour:
   player: {fileID: 0}
   checkpoint: {fileID: 0}
   doWeGiveJump: 1
+  doWeGiveRed: 0
   doWeGiveBlue: 0
   doWeGiveYellow: 0
+  bonusSound: {fileID: 0}
 --- !u!50 &7834620477566039296
 Rigidbody2D:
   serializedVersion: 4

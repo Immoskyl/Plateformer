@@ -21,10 +21,16 @@ public class GiveBonus : MonoBehaviour
     private bool doWeGiveJump;
     
     [SerializeField] 
+    private bool doWeGiveRed;
+    
+    [SerializeField] 
     private bool doWeGiveBlue;
     
     [SerializeField] 
     private bool doWeGiveYellow;
+    
+    [SerializeField]
+    public AudioSource bonusSound;
     
     public GameObject Player
     {
@@ -60,6 +66,14 @@ public class GiveBonus : MonoBehaviour
     }
     
     /**
+    * Give the player the ability to switch to the Blue Color
+    */
+    private void GiveRed()
+    {
+        player.GetComponent<PlayerControls>().IsRedUnlocked = true;
+    }
+    
+    /**
      * Give the player the ability to switch to the Yellow Color
      */
     private void GiveYellow()
@@ -67,20 +81,21 @@ public class GiveBonus : MonoBehaviour
         player.GetComponent<PlayerControls>().IsYellowUnlocked = true;
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
+            bonusSound.Play(); 
+            
             if (checkpoint != null)
                 UpdateCheckpoint();
 
             if (doWeGiveJump)
                 GiveJumps(1);
-
+            
+            if (doWeGiveRed)
+                GiveRed();
+            
             if (doWeGiveBlue)
                 GiveBlue();
 

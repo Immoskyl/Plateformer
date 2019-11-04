@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class KillingPlateformer : AbstractPlateform
 {
+    
+    
+    [SerializeField]
+    public AudioSource passThroughSound;
+    
+    [SerializeField]
+    public AudioSource collisionSound;
+    
+    [SerializeField]
+    public AudioSource landingSound;
+    
     // Update is called once per frame
     void Update()
     {
         if (isPlayerNear)
         {
-            if (plateformColor == playerControls.color || plateformColor == PlayerControls.Color.Neutre) Update_Block_Moves();
+            if (plateformColor != playerControls.color || plateformColor == PlayerControls.Color.Neutre) Update_Block_Moves();
         }
     }
 

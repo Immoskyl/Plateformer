@@ -31,12 +31,6 @@ public class MovementManager : MonoBehaviour
     private int jumpsInARow;
 
     /**
-    * Jumps after touched a wall
-    */
-    [SerializeField]
-    private int wallJumps;
-
-    /**
      * Value of the character running in the left of right direction
      */
     [SerializeField]
@@ -309,12 +303,6 @@ public class MovementManager : MonoBehaviour
     {
         JumpsInARow = 0;
     }
-
-    public int Jump_On_Wall(bool booleanExpr)
-    {
-        return booleanExpr ? wallJumps : 0;
-    }
-
     public void PlayJumpSound()
     {
         switch (JumpsInARow)
@@ -378,7 +366,6 @@ public class MovementManager : MonoBehaviour
     public void Die()
     {
         transform.localPosition = checkpointPos;
-        //GetComponent<Transform>().localPosition = checkpointPos;
         PlayDeathSound();
         GetComponent<CameraShake>().TriggerShake();
     }
