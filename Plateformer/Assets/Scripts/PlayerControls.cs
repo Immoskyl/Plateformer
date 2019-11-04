@@ -14,7 +14,6 @@ public class PlayerControls : MonoBehaviour
 
     public bool blockMoveDown, blockMoveUp, blockMoveLeft, blockMoveRight;
 
-    public Vector2 test;
     public enum Color { Red, Blue, Yellow, Green, Purple }
 
     public Color color;
@@ -22,24 +21,6 @@ public class PlayerControls : MonoBehaviour
 
     public MovementManager movementManager;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        //Debug.Log("doc");
-        //Calcul des nouvelles positions
-
-
-
-
-    }
 
     private void LateUpdate()
     {
@@ -59,6 +40,8 @@ public class PlayerControls : MonoBehaviour
 
         //Modification de la position
         transform.localPosition = new Vector2(newPositionX, newPositionY);
+        var pos = transform.localPosition;
+        var scale = transform.localScale;
 
         
         ///// Mise à jour de la vitesse /////
@@ -66,20 +49,11 @@ public class PlayerControls : MonoBehaviour
         movementManager.DecayJump();
 
 
-        //Mise à jour du blocage
-        /*
-        if (speed.x < 0 && blockMoveRight) blockMoveRight = false;
-        if (speed.x > 0 && blockMoveLeft) blockMoveLeft = false;
-        if (speed.y > 0 && blockMoveDown) blockMoveDown = false;
-        if (speed.y < 0 && blockMoveUp) blockMoveUp = false;
-        */
-
-
         //Calcul des positions de la prochaine frame        
-        playerLeft = transform.localPosition.x - transform.localScale.x / 2 + speed.x;
-        playerRight = transform.localPosition.x + transform.localScale.x / 2 + speed.x;
-        playerUp = transform.localPosition.y + transform.localScale.y / 2 + speed.y;
-        playerDown = transform.localPosition.y - transform.localScale.y / 2 + speed.y;
+        playerLeft = pos.x - scale.x / 2 + speed.x;
+        playerRight = pos.x + scale.x / 2 + speed.x;
+        playerUp = pos.y + scale.y / 2 + speed.y;
+        playerDown = pos.y - scale.y / 2 + speed.y;
 
         blockMoveRight = false;
         blockMoveLeft = false;
@@ -93,32 +67,4 @@ public class PlayerControls : MonoBehaviour
     {
         movementManager.Reset_Jumps();
     }
-
-    ////ARCHIVES////
-    /*
-    public bool isBlocked;
-
-    public int jumpingCount;
-
-    public GameObject plateformPlayerIs;
-
-    public int raycastPrecision;
-
-    public float maxMoveRight;
-    public float maxMoveLeft;
-    public float maxMoveTop;
-    public float maxMoveDown;
-
-    public Vector2 acceleration;
-
-    public Vector2 frameMovement;
-
-    public float speedMove;
-    public float speedFall;
-    public float speedMoveJump;
-
-    public float maxSpeedJump;
-    public float accelerationJump;
-    public int heightJump;
-    */
 }

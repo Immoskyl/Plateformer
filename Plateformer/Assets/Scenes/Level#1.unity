@@ -8862,6 +8862,11 @@ PrefabInstance:
       propertyPath: deathSound
       value: 
       objectReference: {fileID: 122146073}
+    - target: {fileID: 7079229501441338547, guid: d9c101e4382002f40a1a36557a43885e,
+        type: 3}
+      propertyPath: wallJumps
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9c101e4382002f40a1a36557a43885e, type: 3}
 --- !u!1001 &9122546341908555764
