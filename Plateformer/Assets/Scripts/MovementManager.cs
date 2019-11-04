@@ -367,7 +367,8 @@ public class MovementManager : MonoBehaviour
 
     public void Die()
     {
-        PlayDeathSound();
+        //PlayDeathSound();
+        Debug.Log("Die");
     }
 
     public void PlayDeathSound()

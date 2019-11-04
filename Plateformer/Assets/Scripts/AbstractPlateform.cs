@@ -4,51 +4,54 @@ using UnityEngine;
 
 public abstract class AbstractPlateform : MonoBehaviour
 {
+    //vrai ssi la plateforme bouge
+    private bool _movingPlateform;
 
-    public bool movingPlateform;
-    public Vector2 speed;
+    //vitesse de la plateforme
+    private Vector2 _speed;
 
-    
+    //vrai ssi le joueur est dans le collider de la plateforme (qui est plus grand que la plateforme)
+    private bool _isPlayerNear;
+
+    public bool movingPlateform
+    {
+        get { return _movingPlateform; }
+        set { _movingPlateform = value; }
+    }
+
+    public Vector2 speed 
+    {
+        get { return _speed; }
+        set { _speed = value; }
+    }
+
+    public bool isPlayerNear 
+    {
+        get { return _isPlayerNear; }
+        set { _isPlayerNear = value; }
+    }
+
+
+    [HideInInspector]
     public PlayerControls playerControls;
-    public bool isPlayerNear;
 
+    //Couleure de la plateform et les sprites associées
     public PlayerControls.Color plateformColor;
-
     public Sprite redSprite;
     public Sprite blueSprite;
     public Sprite yellowSprite;
     public Sprite greenSprite;
-    public Sprite purpleSprite;
+    public Sprite neutreSprite;
 
+    //fonction qui gére la collision entre le joueur et la plateforme
     public abstract void Update_Block_Moves();
-
-    public Vector2 test;
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {/*
-        Debug.Log("hello");
-        
-        if (collision.gameObject.tag == "Player")
-        {
-
-            playerControls = collision.gameObject.GetComponent<PlayerControls>();
-
-            if (plateformColor == playerControls.color)
-            {
-                Update_Block_Moves();
-                //Update_Unblock_Moves();
-            }
-        }*/
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            
             playerControls = collision.gameObject.GetComponent<PlayerControls>();
             isPlayerNear = true;
-
         }
     }
 
@@ -60,42 +63,8 @@ public abstract class AbstractPlateform : MonoBehaviour
             isPlayerNear = false;
         }
     }
-
-    /*
-    private void Update_Unblock_Moves()
-    {
-        //Positions du joueur à la frame d'après
-        float plateformLeft = transform.position.x - transform.localScale.x / 2;
-        float plateformRight = transform.position.x + transform.localScale.x / 2;
-        float plateformUp = transform.position.y + transform.localScale.y / 2;
-        float plateformDown = transform.position.y - transform.localScale.y / 2;
-
-        //Quand le joueur arrive au dessus de la plateform
-        if (!(playerControls.playerDown > plateformUp) && !downAlreadyBlocked)
-        {
-            playerControls.blockMoveDown = false;
-        }
-
-        //quand le joueur arrive sur le côté gauche de la plateform
-        if (!(playerControls.playerLeft > plateformRight) && !leftAlreadyBlocked)
-        {
-            playerControls.blockMoveLeft = false;
-        }
-
-        //quand le joueur arrive sur le côté droit de la plateform
-        if (!(playerControls.playerRight < plateformLeft) && !rightAlreadyBlocked)
-        {
-            playerControls.blockMoveRight = false;
-        }
-
-        //Quand le joueur arrive au dessus de la plateform
-        if (!(playerControls.playerUp < plateformDown) && !upAlreadyBlocked)
-        {
-            playerControls.blockMoveUp = false;
-        }
-    }
-    */
-
+    
+    //fonction pour changer la couleur de la plateforme
     public void changeColor(PlayerControls.Color _color)
     {
         if (_color != plateformColor)
@@ -119,23 +88,11 @@ public abstract class AbstractPlateform : MonoBehaviour
                     GetComponent<SpriteRenderer>().sprite = greenSprite;
                     break;
 
-                case PlayerControls.Color.Purple:
-                    GetComponent<SpriteRenderer>().sprite = purpleSprite;
+                case PlayerControls.Color.Neutre:
+                    GetComponent<SpriteRenderer>().sprite = neutreSprite;
                     break;
             }
                  
         }
     }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            playerControls = null;
-        }
-    }
-
-
-
-
 }

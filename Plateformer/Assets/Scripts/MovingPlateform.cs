@@ -56,8 +56,7 @@ public class MovingPlateform : MonoBehaviour
             justChanged = false;
             originalPosition.x = transform.position.x;
             originalPosition.y = transform.position.y;
-            abstractPlateform.speed.x = xSpeedL;
-            abstractPlateform.speed.y = ySpeedL;
+            abstractPlateform.speed = new Vector2(xSpeedL,ySpeedL);
         }
         
         if (moveType == MoveType.Rectangle)
@@ -74,8 +73,7 @@ public class MovingPlateform : MonoBehaviour
             }
             originalPosition.x = transform.position.x + xDistanceR;
             originalPosition.y = transform.position.y + yDistanceR;
-            abstractPlateform.speed.x = xSpeedR;
-            abstractPlateform.speed.y = ySpeedR;
+            abstractPlateform.speed = new Vector2(xSpeedR, ySpeedR);
         }
     }
 

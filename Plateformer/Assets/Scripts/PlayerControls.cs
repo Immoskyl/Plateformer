@@ -4,42 +4,56 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
-    public Vector2 blockedPosition;
-    public Vector2 speed;
+    public enum Color { Red, Blue, Yellow, Green, Neutre }
 
-    public bool isOnPlateform;
-    public bool isJumping;
+    //couleur de la plateform
+    private Color _color;
 
-    public double playerLeft, playerRight, playerUp, playerDown;
+    //Valeur des positions que le joueur ne peut dépasser lorsqu'il est bloqué
+    private Vector2 _blockedPosition;
 
+    //vitesse du joueur
+    private Vector2 _speed;
+
+    //true ssi le joueur est en train de sauter
+    private bool _isJumping;
+
+    public Vector2 blockedPosition
+    {
+        get { return _blockedPosition; }
+        set { blockedPosition = value; }
+    }
+    
+    public Vector2 speed
+    {
+        get { return _speed; }
+        set { _speed = value; }
+    }    
+    
+    public bool isJumping
+    {
+        get { return _isJumping; }
+        set { _isJumping = value; }
+    }
+
+    public Color color
+    {
+        get { return _color; }
+        set { _color = value; }
+    }
+
+    //extrémités gauche droite haute et basse du joueur à la prochaine frame
+    [HideInInspector]
+    public float playerLeft, playerRight, playerUp, playerDown;
+
+    //Le joueur est bloqué et ne peut plus aller plus loin vers le bas, le haut, la gauche, la droite
+    [HideInInspector]
     public bool blockMoveDown, blockMoveUp, blockMoveLeft, blockMoveRight;
 
-    public Vector2 test;
-    public enum Color { Red, Blue, Yellow, Green, Purple }
-
-    public Color color;
-
-
+    //script qui gère les mouvements du joueur
+    [HideInInspector]
     public MovementManager movementManager;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        //Debug.Log("doc");
-        //Calcul des nouvelles positions
-
-
-
-
-    }
 
     private void LateUpdate()
     {
@@ -66,13 +80,9 @@ public class PlayerControls : MonoBehaviour
         movementManager.DecayJump();
 
 
-        //Mise à jour du blocage
-        /*
-        if (speed.x < 0 && blockMoveRight) blockMoveRight = false;
-        if (speed.x > 0 && blockMoveLeft) blockMoveLeft = false;
-        if (speed.y > 0 && blockMoveDown) blockMoveDown = false;
-        if (speed.y < 0 && blockMoveUp) blockMoveUp = false;
-        */
+        //Permet de savoir si le joueur saute
+        if (blockMoveDown) isJumping = false;
+        else isJumping = true;
 
 
         //Calcul des positions de la prochaine frame        
@@ -81,12 +91,12 @@ public class PlayerControls : MonoBehaviour
         playerUp = transform.localPosition.y + transform.localScale.y / 2 + speed.y;
         playerDown = transform.localPosition.y - transform.localScale.y / 2 + speed.y;
 
+
+        //Mise à jour du blocage
         blockMoveRight = false;
         blockMoveLeft = false;
         blockMoveDown = false;
         blockMoveUp = false;
-
-        //  transform.SetParent(null);
     }
 
     public void Reset_Jumps()
@@ -94,31 +104,4 @@ public class PlayerControls : MonoBehaviour
         movementManager.Reset_Jumps();
     }
 
-    ////ARCHIVES////
-    /*
-    public bool isBlocked;
-
-    public int jumpingCount;
-
-    public GameObject plateformPlayerIs;
-
-    public int raycastPrecision;
-
-    public float maxMoveRight;
-    public float maxMoveLeft;
-    public float maxMoveTop;
-    public float maxMoveDown;
-
-    public Vector2 acceleration;
-
-    public Vector2 frameMovement;
-
-    public float speedMove;
-    public float speedFall;
-    public float speedMoveJump;
-
-    public float maxSpeedJump;
-    public float accelerationJump;
-    public int heightJump;
-    */
 }
