@@ -15,6 +15,7 @@ public class PlayerControls : MonoBehaviour
     //vitesse du joueur
     private Vector2 _speed;
 
+
     //true ssi le joueur est en train de sauter
     private bool _isJumping;
 
@@ -52,6 +53,7 @@ public class PlayerControls : MonoBehaviour
 
     //script qui gère les mouvements du joueur
     [HideInInspector]
+
     public MovementManager movementManager;
 
 
@@ -66,6 +68,7 @@ public class PlayerControls : MonoBehaviour
 
         if (blockMoveRight && blockedPosition.x < newPositionX || blockMoveLeft && blockedPosition.x > newPositionX) newPositionX = blockedPosition.x;
 
+        movementManager.MovePlayer();
 
         //Saut mural
         movementManager.Jump_On_Wall((blockMoveRight || blockMoveLeft) && !blockMoveDown);
@@ -73,23 +76,23 @@ public class PlayerControls : MonoBehaviour
 
         //Modification de la position
         transform.localPosition = new Vector2(newPositionX, newPositionY);
+        var pos = transform.localPosition;
+        var scale = transform.localScale;
 
         
         ///// Mise à jour de la vitesse /////
         speed = movementManager.CalcSpeed();
         movementManager.DecayJump();
 
-
         //Permet de savoir si le joueur saute
         if (blockMoveDown) isJumping = false;
         else isJumping = true;
 
-
         //Calcul des positions de la prochaine frame        
-        playerLeft = transform.localPosition.x - transform.localScale.x / 2 + speed.x;
-        playerRight = transform.localPosition.x + transform.localScale.x / 2 + speed.x;
-        playerUp = transform.localPosition.y + transform.localScale.y / 2 + speed.y;
-        playerDown = transform.localPosition.y - transform.localScale.y / 2 + speed.y;
+        playerLeft = pos.x - scale.x / 2 + speed.x;
+        playerRight = pos.x + scale.x / 2 + speed.x;
+        playerUp = pos.y + scale.y / 2 + speed.y;
+        playerDown = pos.y - scale.y / 2 + speed.y;
 
 
         //Mise à jour du blocage
@@ -103,5 +106,4 @@ public class PlayerControls : MonoBehaviour
     {
         movementManager.Reset_Jumps();
     }
-
 }

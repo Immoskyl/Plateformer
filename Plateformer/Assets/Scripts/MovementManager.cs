@@ -268,9 +268,7 @@ public class MovementManager : MonoBehaviour
         Fall();
     }
     
-
-    // Update is called once per frame
-    void Update()
+    public void MovePlayer() 
     {
         if (Input.GetKeyDown("space") && JumpsInARow < NumberOfJumps + wallJumps)
             Jump();
@@ -298,10 +296,9 @@ public class MovementManager : MonoBehaviour
         JumpsInARow = 0;
     }
 
-    public int Jump_On_Wall(bool _bool)
+    public int Jump_On_Wall(bool booleanExpr)
     {
-        if (_bool) return wallJumps;
-        else return 0;
+        return booleanExpr ? wallJumps : 0;
     }
 
     public void PlayJumpSound()
