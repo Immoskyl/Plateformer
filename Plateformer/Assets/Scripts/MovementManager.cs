@@ -268,9 +268,7 @@ public class MovementManager : MonoBehaviour
         Fall();
     }
     
-
-    // Update is called once per frame
-    void Update()
+    public void MovePlayer() 
     {
         if (Input.GetKeyDown("space") && JumpsInARow < NumberOfJumps + wallJumps)
             Jump();

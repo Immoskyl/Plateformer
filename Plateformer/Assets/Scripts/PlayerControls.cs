@@ -33,6 +33,7 @@ public class PlayerControls : MonoBehaviour
 
         if (blockMoveRight && blockedPosition.x < newPositionX || blockMoveLeft && blockedPosition.x > newPositionX) newPositionX = blockedPosition.x;
 
+        movementManager.MovePlayer();
 
         //Saut mural
         movementManager.Jump_On_Wall((blockMoveRight || blockMoveLeft) && !blockMoveDown);
