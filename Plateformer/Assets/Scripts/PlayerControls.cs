@@ -21,6 +21,22 @@ public class PlayerControls : MonoBehaviour
 
     public MovementManager movementManager;
 
+    private bool isBlueUnlocked;
+    
+    private bool isYellowUnlocked;
+
+    public bool IsBlueUnlocked
+    {
+        get => isBlueUnlocked;
+        set => isBlueUnlocked = value;
+    }
+
+    public bool IsYellowUnlocked
+    {
+        get => isYellowUnlocked;
+        set => isYellowUnlocked = value;
+    }
+
 
     private void LateUpdate()
     {
