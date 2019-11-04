@@ -5,32 +5,26 @@ using UnityEngine;
 public class NormalPlateform : AbstractPlateform
 {
     public bool traversable;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-
-
     // Update is called once per frame
     void Update()
     {
-       // Debug.Log("bon");
         if (isPlayerNear)
         {
-            if (plateformColor == playerControls.color) Update_Block_Moves();
+            if (plateformColor == playerControls.color) 
+                Update_Block_Moves();
         }
     }
 
     public override void Update_Block_Moves()
     {
+        var pos = transform.position;
+        var scale = transform.localScale;
+        
         //Positions de la plateform à la frame d'après
-        float currentPlateformLeft = transform.position.x - transform.localScale.x / 2;
-        float currentPlateformRight = transform.position.x + transform.localScale.x / 2;
-        float currentPlateformUp = transform.position.y + transform.localScale.y / 2;
-        float currentPlateformDown = transform.position.y - transform.localScale.y / 2;
+        float currentPlateformLeft = pos.x - scale.x / 2;
+        float currentPlateformRight = pos.x + scale.x / 2;
+        float currentPlateformUp = pos.y + scale.y / 2;
+        float currentPlateformDown = pos.y - scale.y / 2;
 
         float plateformLeft = currentPlateformLeft - Time.deltaTime * speed.x;
         float plateformRight = currentPlateformRight + Time.deltaTime * speed.x;
@@ -41,18 +35,18 @@ public class NormalPlateform : AbstractPlateform
         test.x = plateformLeft;
         test.y = plateformDown;
 
-
+        var playerPos = playerControls.transform.localPosition;
+        var playerScale = playerControls.transform.localScale;
         
-        float currentPlayerLeft = playerControls.transform.localPosition.x - playerControls.transform.localScale.x / 2;
-        float currentPlayerRight = playerControls.transform.localPosition.x + playerControls.transform.localScale.x / 2;
-        float currentPlayerDown = playerControls.transform.localPosition.y - playerControls.transform.localScale.y / 2;
-        float currentPlayerUP = playerControls.transform.localPosition.y + playerControls.transform.localScale.y / 2;
+        float currentPlayerLeft = playerPos.x - playerScale.x / 2;
+        float currentPlayerRight = playerPos.x + playerScale.x / 2;
+        float currentPlayerDown = playerPos.y - playerScale.y / 2;
+        float currentPlayerUP = playerPos.y + playerScale.y / 2;
 
         //quand le joueur est sur le coté de la plateform
 
         if (currentPlayerRight <= currentPlateformLeft || currentPlayerLeft >= currentPlateformRight)
         {
-           // print("non");
             if ((currentPlateformDown < currentPlayerDown && currentPlayerDown < currentPlateformUp)
                 || (currentPlateformDown < currentPlayerUP && currentPlayerDown < currentPlateformUp))
             {
@@ -72,7 +66,7 @@ public class NormalPlateform : AbstractPlateform
                     }
                 }
 
-                    //quand le joueur arrive sur le côté droit de la plateform
+                //quand le joueur arrive sur le côté droit de la plateform
                 if (currentPlayerLeft >= currentPlateformRight && playerControls.playerLeft < plateformRight)
                 {
                     if (playerControls.blockMoveLeft)

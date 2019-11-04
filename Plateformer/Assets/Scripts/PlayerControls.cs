@@ -66,6 +66,6 @@ public class PlayerControls : MonoBehaviour
 
     public void Reset_Jumps()
     {
-        movementManager.Reset_Jumps();
+        movementManager.ResetJumps();
     }
 }

@@ -24,22 +24,6 @@ public abstract class AbstractPlateform : MonoBehaviour
 
     public Vector2 test;
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {/*
-        Debug.Log("hello");
-        
-        if (collision.gameObject.tag == "Player")
-        {
-
-            playerControls = collision.gameObject.GetComponent<PlayerControls>();
-
-            if (plateformColor == playerControls.color)
-            {
-                Update_Block_Moves();
-                //Update_Unblock_Moves();
-            }
-        }*/
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -60,41 +44,6 @@ public abstract class AbstractPlateform : MonoBehaviour
             isPlayerNear = false;
         }
     }
-
-    /*
-    private void Update_Unblock_Moves()
-    {
-        //Positions du joueur à la frame d'après
-        float plateformLeft = transform.position.x - transform.localScale.x / 2;
-        float plateformRight = transform.position.x + transform.localScale.x / 2;
-        float plateformUp = transform.position.y + transform.localScale.y / 2;
-        float plateformDown = transform.position.y - transform.localScale.y / 2;
-
-        //Quand le joueur arrive au dessus de la plateform
-        if (!(playerControls.playerDown > plateformUp) && !downAlreadyBlocked)
-        {
-            playerControls.blockMoveDown = false;
-        }
-
-        //quand le joueur arrive sur le côté gauche de la plateform
-        if (!(playerControls.playerLeft > plateformRight) && !leftAlreadyBlocked)
-        {
-            playerControls.blockMoveLeft = false;
-        }
-
-        //quand le joueur arrive sur le côté droit de la plateform
-        if (!(playerControls.playerRight < plateformLeft) && !rightAlreadyBlocked)
-        {
-            playerControls.blockMoveRight = false;
-        }
-
-        //Quand le joueur arrive au dessus de la plateform
-        if (!(playerControls.playerUp < plateformDown) && !upAlreadyBlocked)
-        {
-            playerControls.blockMoveUp = false;
-        }
-    }
-    */
 
     public void changeColor(PlayerControls.Color _color)
     {
