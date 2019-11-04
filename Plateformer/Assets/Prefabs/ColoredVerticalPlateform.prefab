@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5958541195566371289}
   - component: {fileID: 5958541195566371290}
   m_Layer: 0
-  m_Name: KillingVerticalPlateform
+  m_Name: ColoredVerticalPlateform
   m_TagString: Plateform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,8 +144,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerControls: {fileID: 0}
   plateformColor: 0
-  redSprite: {fileID: 0}
-  blueSprite: {fileID: 0}
-  yellowSprite: {fileID: 0}
+  redSprite: {fileID: 21300000, guid: e7b036dc486d9b64d8731fea9ca628ff, type: 3}
+  blueSprite: {fileID: 21300000, guid: 595720e9837ac544e9cca2405fae040a, type: 3}
+  yellowSprite: {fileID: 21300000, guid: 9453e79dc6f4e4c4abc8cc1377a0dc7e, type: 3}
   greenSprite: {fileID: 0}
   neutreSprite: {fileID: 0}
