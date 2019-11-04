@@ -304,7 +304,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &59170940
 PrefabInstance:
@@ -589,6 +589,65 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 122352763}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &131154120 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 246394133930001301, guid: 6e76651bcf8fe4648af6846b20c9dd0b,
+    type: 3}
+  m_PrefabInstance: {fileID: 475983109}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &131154125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131154120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: accf383c4516f3e4e8e2fe12a289ff5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerControls: {fileID: 0}
+  plateformColor: 0
+  redSprite: {fileID: 0}
+  blueSprite: {fileID: 0}
+  yellowSprite: {fileID: 0}
+  greenSprite: {fileID: 0}
+  neutreSprite: {fileID: 0}
+--- !u!114 &131154126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131154120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70eca8f9f4ff995409c331ca92d065ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abstractPlateform: {fileID: 0}
+  originalPosition: {x: 0, y: 0}
+  moveType: 0
+  newPosition: {x: 0, y: 0}
+  xSpeedL: 4
+  ySpeedL: 0
+  distanceL: 2
+  rightTimeStopL: 2
+  leftTimeStopL: 1
+  distanceFactor: 0
+  justChanged: 0
+  horizontalFirst: 0
+  xSpeedR: 0
+  ySpeedR: 0
+  yDistanceR: 0
+  xDistanceR: 0
+  upRightTimeStopR: 0
+  upLeftTimeStopR: 0
+  downLeftTimeStopR: 0
+  downRightTimeStopR: 0
+  xDistanceFactor: 0
+  yDistanceFactor: 0
 --- !u!1 &134747558
 GameObject:
   m_ObjectHideFlags: 0
@@ -2267,6 +2326,11 @@ PrefabInstance:
     - target: {fileID: 246394133930001304, guid: 6e76651bcf8fe4648af6846b20c9dd0b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 246394133930001300, guid: 6e76651bcf8fe4648af6846b20c9dd0b,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -5416,7 +5480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shakeDuration: 1.02
-  shakeMagnitude: 0.7
+  shakeMagnitude: 0.24
 --- !u!1001 &1312683641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8877,7 +8941,7 @@ PrefabInstance:
     - target: {fileID: 4845265822361733343, guid: 34d3a4ea225ea56428c7c75d6264b4ae,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4845265822361733343, guid: 34d3a4ea225ea56428c7c75d6264b4ae,
         type: 3}

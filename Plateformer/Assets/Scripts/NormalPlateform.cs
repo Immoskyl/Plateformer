@@ -128,6 +128,7 @@ public class NormalPlateform : AbstractPlateform
                         {
                             playerControls.blockMoveUp = true;
                             playerControls.blockedPosition.y = plateformDown - playerControls.transform.localScale.y / 2 - 0.008f;
+                            playerControls.movementManager.RemoveForce(MovementManager.Forces.Jumping);
                         }
                     }
                 }
