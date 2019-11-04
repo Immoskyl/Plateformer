@@ -9,9 +9,6 @@ public class PlayerControls : MonoBehaviour
     //couleur de la plateform
     private Color _color;
 
-    //Valeur des positions que le joueur ne peut dépasser lorsqu'il est bloqué
-    private Vector2 _blockedPosition;
-
     //vitesse du joueur
     private Vector2 _speed;
 
@@ -19,11 +16,6 @@ public class PlayerControls : MonoBehaviour
     //true ssi le joueur est en train de sauter
     private bool _isJumping;
 
-    public Vector2 blockedPosition
-    {
-        get { return _blockedPosition; }
-        set { blockedPosition = value; }
-    }
     
     public Vector2 speed
     {
@@ -53,8 +45,11 @@ public class PlayerControls : MonoBehaviour
 
     //script qui gère les mouvements du joueur
     [HideInInspector]
-
     public MovementManager movementManager;
+
+    //Valeur des positions que le joueur ne peut dépasser lorsqu'il est bloqué
+    [HideInInspector]
+    public Vector2 blockedPosition;
 
 
     private void LateUpdate()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Plateform : MonoBehaviour
 {
-    public static bool rightAlreadyBlocked, leftAlreadyBlocked, downAlreadyBlocked, upAlreadyBlocked;
+/*    public static bool rightAlreadyBlocked, leftAlreadyBlocked, downAlreadyBlocked, upAlreadyBlocked;
 
     public PlayerControls playerControls;
 
@@ -129,5 +129,5 @@ public class Plateform : MonoBehaviour
         {
             GameObject player = playerControls.gameObject;
         }
-    }
+    }*/
 }
