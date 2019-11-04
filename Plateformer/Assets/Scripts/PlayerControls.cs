@@ -47,16 +47,10 @@ public class PlayerControls : MonoBehaviour
     [HideInInspector]
     public MovementManager movementManager;
 
-<<<<<<< HEAD
-    [HideInInspector]
-    public Vector2 blockedPosition;
-
-=======
     //Valeur des positions que le joueur ne peut dépasser lorsqu'il est bloqué
     [HideInInspector]
     public Vector2 blockedPosition;
     
->>>>>>> 42e45f1520dc1abdd9fcaca38b26e49141e15ace
     private bool isBlueUnlocked;
     
     private bool isYellowUnlocked;
@@ -72,10 +66,6 @@ public class PlayerControls : MonoBehaviour
         get => isYellowUnlocked;
         set => isYellowUnlocked = value;
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 42e45f1520dc1abdd9fcaca38b26e49141e15ace
 
     private void LateUpdate()
     {
