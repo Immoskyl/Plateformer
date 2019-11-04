@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -63,36 +64,38 @@ public abstract class AbstractPlateform : MonoBehaviour
             isPlayerNear = false;
         }
     }
-    
+
+    private void Awake()
+    {
+        changeColor(plateformColor);
+    }
+
     //fonction pour changer la couleur de la plateforme
     public void changeColor(PlayerControls.Color _color)
     {
-        if (_color != plateformColor)
+        plateformColor = _color;
+        switch (_color)
         {
-            plateformColor = _color;
-            switch (_color)
-            {
-                case PlayerControls.Color.Red :
-                    GetComponent<SpriteRenderer>().sprite = redSprite;
-                    break;
+            case PlayerControls.Color.Red :
+                GetComponent<SpriteRenderer>().sprite = redSprite;
+                break;
 
-                case PlayerControls.Color.Blue:
-                    GetComponent<SpriteRenderer>().sprite = blueSprite;
-                    break;
+            case PlayerControls.Color.Blue:
+                GetComponent<SpriteRenderer>().sprite = blueSprite;
+                break;
 
-                case PlayerControls.Color.Yellow:
-                    GetComponent<SpriteRenderer>().sprite = yellowSprite;
-                    break;
+            case PlayerControls.Color.Yellow:
+                GetComponent<SpriteRenderer>().sprite = yellowSprite;
+                break;
 
-                case PlayerControls.Color.Green:
-                    GetComponent<SpriteRenderer>().sprite = greenSprite;
-                    break;
+            case PlayerControls.Color.Green:
+                GetComponent<SpriteRenderer>().sprite = greenSprite;
+                break;
 
-                case PlayerControls.Color.Neutre:
-                    GetComponent<SpriteRenderer>().sprite = neutreSprite;
-                    break;
-            }
-                 
+            case PlayerControls.Color.Neutre:
+            default:
+                //GetComponent<SpriteRenderer>().sprite = neutreSprite;
+                break;
         }
     }
 }

@@ -7,12 +7,22 @@ public class NormalPlateform : AbstractPlateform
     //Savoir si la plateform est traversable depuis le bas
     public bool traversable;
     
+    
+    [SerializeField]
+    public AudioSource passThroughSound;
+    
+    [SerializeField]
+    public AudioSource collisionSound;
+    
+    [SerializeField]
+    public AudioSource landingSound;
+    
     // Update is called once per frame
     void Update()
     {
         if (isPlayerNear)
         {
-            if (plateformColor == playerControls.color) 
+            if (plateformColor != playerControls.color || plateformColor == PlayerControls.Color.Neutre) 
                 Update_Block_Moves();
         }
     }
@@ -61,6 +71,7 @@ public class NormalPlateform : AbstractPlateform
                     }
                     else
                     {
+                        //collisionSound.Play();
                         playerControls.blockedPosition.x = plateformLeft - playerControls.transform.localScale.x / 2 - 0.008f;
                         playerControls.blockMoveRight = true;
                     }
@@ -78,6 +89,7 @@ public class NormalPlateform : AbstractPlateform
                     }
                     else
                     {
+                        //collisionSound.Play();
                         playerControls.blockMoveLeft = true;
                         playerControls.blockedPosition.x = plateformRight + playerControls.transform.localScale.x / 2 + 0.008f;
                     }
@@ -106,6 +118,7 @@ public class NormalPlateform : AbstractPlateform
                     }
                     else
                     {
+                        //landingSound.Play();
                         playerControls.blockMoveDown = true;
                         playerControls.blockedPosition.y = plateformUp + playerControls.transform.localScale.y / 2 + 0.008f;
                         playerControls.Reset_Jumps();
@@ -126,6 +139,8 @@ public class NormalPlateform : AbstractPlateform
                         }
                         else
                         {
+                            
+                            //collisionSound.Play();
                             playerControls.blockMoveUp = true;
                             playerControls.blockedPosition.y = plateformDown - playerControls.transform.localScale.y / 2 - 0.008f;
                             playerControls.movementManager.RemoveForce(MovementManager.Forces.Jumping);

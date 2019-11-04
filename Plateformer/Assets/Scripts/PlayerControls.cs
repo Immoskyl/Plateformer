@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -51,9 +52,17 @@ public class PlayerControls : MonoBehaviour
     [HideInInspector]
     public Vector2 blockedPosition;
     
-    private bool isBlueUnlocked;
+    private bool isRedUnlocked;
     
+    private bool isBlueUnlocked;
+
     private bool isYellowUnlocked;
+
+    public bool IsRedUnlocked
+    {
+        get => isRedUnlocked;
+        set => isRedUnlocked = value;
+    }
 
     public bool IsBlueUnlocked
     {
@@ -65,6 +74,11 @@ public class PlayerControls : MonoBehaviour
     {
         get => isYellowUnlocked;
         set => isYellowUnlocked = value;
+    }
+
+    private void Awake()
+    {
+        color = Color.Red;
     }
 
     private void LateUpdate()
@@ -81,7 +95,7 @@ public class PlayerControls : MonoBehaviour
         movementManager.MovePlayer();
 
         //Saut mural
-        movementManager.Jump_On_Wall((blockMoveRight || blockMoveLeft) && !blockMoveDown);
+        //movementManager.Jump_On_Wall((blockMoveRight || blockMoveLeft) && !blockMoveDown);
 
 
         //Modification de la position
@@ -110,6 +124,26 @@ public class PlayerControls : MonoBehaviour
         blockMoveLeft = false;
         blockMoveDown = false;
         blockMoveUp = false;
+    }
+
+    void Update()
+    {
+        if (Input.GetButton("SwitchRed") && isRedUnlocked)
+        {
+            GetComponent<SpriteRenderer>().color = UnityEngine.Color.red;
+            color = Color.Red;
+        }
+        else if (Input.GetButton("SwitchBlue") && isBlueUnlocked)
+        {
+            GetComponent<SpriteRenderer>().color = UnityEngine.Color.blue;
+            color = Color.Blue;
+        }
+
+        else if (Input.GetButton("SwitchYellow") && isYellowUnlocked)
+        {
+            GetComponent<SpriteRenderer>().color = UnityEngine.Color.yellow;
+            color = Color.Yellow;
+        }
     }
 
     public void Reset_Jumps()
