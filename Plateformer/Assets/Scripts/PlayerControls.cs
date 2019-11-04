@@ -18,6 +18,7 @@ public class PlayerControls : MonoBehaviour
     private bool _isJumping;
 
     
+    
     public Vector2 speed
     {
         get { return _speed; }
@@ -35,6 +36,15 @@ public class PlayerControls : MonoBehaviour
         get { return _color; }
         set { _color = value; }
     }
+
+    public bool isOnPlateform;
+
+    //public bool canStayOnWall;
+    //public bool isOnWall;
+    //public float yStayOnWall;
+
+    //public float stayOnWallTime;
+    //public float _stayOnWallTime;
 
     //extrémités gauche droite haute et basse du joueur à la prochaine frame
     [HideInInspector]
@@ -108,9 +118,10 @@ public class PlayerControls : MonoBehaviour
         speed = movementManager.CalcSpeed();
         movementManager.DecayJump();
 
-        //Permet de savoir si le joueur saute
-        if (blockMoveDown) isJumping = false;
-        else isJumping = true;
+        //Permet de savoir si le joueur est en train de sauter
+        isJumping = movementManager.GetForce(MovementManager.Forces.Jumping) != Vector2.zero;
+
+        isOnPlateform = blockMoveDown;
 
         //Calcul des positions de la prochaine frame        
         playerLeft = pos.x - scale.x / 2 + speed.x;

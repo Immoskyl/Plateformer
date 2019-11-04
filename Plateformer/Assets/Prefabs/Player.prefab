@@ -205,10 +205,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b9cbfe918c4a0438328c9ad78fb92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockedPosition: {x: 0, y: 0}
-  speed: {x: 0, y: 0}
   isOnPlateform: 0
-  isJumping: 0
+  canStayOnWall: 0
+  isOnWall: 0
+  stayOnWallTime: 0
+  _stayOnWallTime: 0
   playerLeft: 0
   playerRight: 0
   playerUp: 0
@@ -217,9 +218,8 @@ MonoBehaviour:
   blockMoveUp: 0
   blockMoveLeft: 0
   blockMoveRight: 0
-  test: {x: 0, y: 0}
-  color: 0
   movementManager: {fileID: 7079229501441338547}
+  blockedPosition: {x: 0, y: 0}
 --- !u!114 &7079229501441338547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,6 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfJumps: 2
   jumpsInARow: 0
+  wallJumps: 0
   acceleration: 50
   baseInertia: 3
   mass: 4.06
@@ -242,6 +243,7 @@ MonoBehaviour:
   jumpStrength: 12
   jumpRound: 2.13
   gravity: 20
+  checkpoint: {fileID: 0}
   firstJumpSound: {fileID: 0}
   secondJumpSound: {fileID: 0}
   thirdJumpSound: {fileID: 0}
