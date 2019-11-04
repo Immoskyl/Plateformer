@@ -42,8 +42,8 @@ MonoBehaviour:
     y: 0
     width: 413
     height: 566
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 277, y: 72}
+  m_MaxSize: {x: 4002, y: 4022}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_MinSize: {x: 481, y: 494}
   m_MaxSize: {x: 10002, y: 14044}
   vertical: 1
-  controlID: 90
+  controlID: 125
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,8 +144,8 @@ MonoBehaviour:
     y: 0
     width: 304
     height: 566
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 204, y: 222}
+  m_MaxSize: {x: 4004, y: 4022}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -387,20 +387,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\kenti\Documents\Plateformer\Plateformer
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 0a2f0000
-    m_LastClickedID: 12042
-    m_ExpandedIDs: 00000000622d0000f62d000000ca9a3b
+    m_SelectedIDs: 24300000
+    m_LastClickedID: 12324
+    m_ExpandedIDs: 00000000622d000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -551,23 +551,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 6afbffff3a330000
+      m_SelectedIDs: 30320000
+      m_LastClickedID: 12848
+      m_ExpandedIDs: 6afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: CheckpointPos
+        m_OriginalName: CheckpointPos
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 12848
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 6}
       m_SearchString: 
@@ -613,7 +613,7 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -5.789302, y: 1.3128905, z: -96.2786}
+    m_Target: {x: 13.84, y: -14.62, z: -1.8554688}
     speed: 2
     m_Value: {x: -5.789302, y: 1.3128905, z: -96.2786}
   m_RenderMode: 0
@@ -648,7 +648,7 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 13.814324
+    m_Target: 22
     speed: 2
     m_Value: 13.814324
   m_Ortho:
@@ -725,7 +725,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
+    m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
