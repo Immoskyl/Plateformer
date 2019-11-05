@@ -32,8 +32,14 @@ public class MusicPlayer : MonoBehaviour
     void Start()
     {
         activeMusic = music1;
+        SetAudioSourcesToPlateforms();
+        
         ChangeMusic(activeMusic);
 
+    }
+
+    private void SetAudioSourcesToPlateforms()
+    {
         foreach (AbstractPlateform plateform in FindObjectsOfType<AbstractPlateform>())
         {
             plateform.CollisionSound = collisionSound;

@@ -5,16 +5,6 @@ using UnityEngine;
 public class KillingPlateformer : AbstractPlateform
 {
     
-    
-    [SerializeField]
-    public AudioSource passThroughSound;
-    
-    [SerializeField]
-    public AudioSource collisionSound;
-    
-    [SerializeField]
-    public AudioSource landingSound;
-    
     // Update is called once per frame
     void Update()
     {
@@ -47,6 +37,10 @@ public class KillingPlateformer : AbstractPlateform
         )
         {
             playerControls.movementManager.Die();
+        }
+        else
+        {
+            PassThroughSound.Play();
         }
 
     }
