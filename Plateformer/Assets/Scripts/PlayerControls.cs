@@ -18,19 +18,19 @@ public class PlayerControls : MonoBehaviour
     //true ssi le joueur est en train de sauter
     private bool _isJumping;
 
-    
+
     [SerializeField]
     public AudioSource colorChangeSound;
 
     [SerializeField]
     private Text text;
-    
+
     public Vector2 speed
     {
         get { return _speed; }
         set { _speed = value; }
-    }    
-    
+    }
+
     public bool isJumping
     {
         get { return _isJumping; }
@@ -58,6 +58,8 @@ public class PlayerControls : MonoBehaviour
     //public float stayOnWallTime;
     //public float _stayOnWallTime;
 
+    public PlayerAnimations playerAnimations;
+
     //extrémités gauche droite haute et basse du joueur à la prochaine frame
     [HideInInspector]
     public float playerLeft, playerRight, playerUp, playerDown;
@@ -73,12 +75,14 @@ public class PlayerControls : MonoBehaviour
     //Valeur des positions que le joueur ne peut dépasser lorsqu'il est bloqué
     [HideInInspector]
     public Vector2 blockedPosition;
-    
+
     private bool isRedUnlocked;
-    
+
     private bool isBlueUnlocked;
 
     private bool isYellowUnlocked;
+
+    public GameObject _camera;
 
     public bool IsRedUnlocked
     {
@@ -104,6 +108,11 @@ public class PlayerControls : MonoBehaviour
         text.enabled = false;
     }
 
+    private void Start()
+    {
+        playerAnimations = GetComponent<PlayerAnimations>();
+    }
+
     private void LateUpdate()
     {
         float newPositionX = transform.localPosition.x + speed.x;
@@ -123,10 +132,15 @@ public class PlayerControls : MonoBehaviour
 
         //Modification de la position
         transform.localPosition = new Vector2(newPositionX, newPositionY);
-        var pos = transform.localPosition;
-        var scale = transform.localScale;
 
-        
+        //Modification de la scale
+        playerAnimations.Animate();
+
+
+        var pos = transform.localPosition;
+        var scale = new Vector2(playerAnimations.newScaleX, playerAnimations.newScaleY);
+
+
         ///// Mise à jour de la vitesse /////
         speed = movementManager.CalcSpeed();
         movementManager.DecayJump();
@@ -184,11 +198,11 @@ public class PlayerControls : MonoBehaviour
         text.enabled = true;
         StartCoroutine(RemoveAfterSeconds(7, text));
     }
-    
+
     IEnumerator RemoveAfterSeconds(int seconds, Text obj)
     {
         yield return new WaitForSeconds(seconds);
         obj.enabled = false;
     }
-          
+
 }
