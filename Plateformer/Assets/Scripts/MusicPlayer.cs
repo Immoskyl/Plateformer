@@ -10,6 +10,16 @@ public class MusicPlayer : MonoBehaviour
     public AudioSource music1;
     
     private AudioSource activeMusic;
+    
+    [SerializeField]
+    public AudioSource passThroughSound;
+    
+    [SerializeField]
+    public AudioSource collisionSound;
+    
+    [SerializeField]
+    public AudioSource landingSound;
+    
 
     public AudioSource ActiveMusic
     {
@@ -23,6 +33,13 @@ public class MusicPlayer : MonoBehaviour
     {
         activeMusic = music1;
         ChangeMusic(activeMusic);
+
+        foreach (AbstractPlateform plateform in FindObjectsOfType<AbstractPlateform>())
+        {
+            plateform.CollisionSound = collisionSound;
+            plateform.LandingSound = landingSound;
+            plateform.PassThroughSound = passThroughSound;
+        }
     }
 
     public void ChangeMusic(AudioSource a)

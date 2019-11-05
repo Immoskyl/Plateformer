@@ -92,9 +92,6 @@ public class PlayerControls : MonoBehaviour
     private void Awake()
     {
         color = Color.Red;
-        GetComponent<Canvas>().
-            GetComponent<Text>().
-            enabled = false;
     }
 
     private void LateUpdate()

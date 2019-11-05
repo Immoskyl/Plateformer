@@ -32,6 +32,28 @@ public abstract class AbstractPlateform : MonoBehaviour
         set { _isPlayerNear = value; }
     }
 
+    public AudioSource PassThroughSound
+    {
+        get => passThroughSound;
+        set => passThroughSound = value;
+    }
+
+    public AudioSource CollisionSound
+    {
+        get => collisionSound;
+        set => collisionSound = value;
+    }
+
+    public AudioSource LandingSound
+    {
+        get => landingSound;
+        set => landingSound = value;
+    }
+
+    private AudioSource passThroughSound;
+    private AudioSource collisionSound;
+    private AudioSource landingSound;
+    
 
     [HideInInspector]
     public PlayerControls playerControls;

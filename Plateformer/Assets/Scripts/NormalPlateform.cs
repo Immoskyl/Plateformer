@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,16 +7,6 @@ public class NormalPlateform : AbstractPlateform
 {
     //Savoir si la plateform est traversable depuis le bas
     public bool traversable;
-
-    [SerializeField]
-    public AudioSource passThroughSound;
-    
-    [SerializeField]
-    public AudioSource collisionSound;
-    
-    [SerializeField]
-    public AudioSource landingSound;
-    
     // Update is called once per frame
     void Update()
     {
@@ -87,7 +78,7 @@ public class NormalPlateform : AbstractPlateform
                     }
                     else
                     {
-                        //collisionSound.Play();
+                        CollisionSound.Play();
                         playerControls.blockedPosition.x = plateformLeft - playerControls.transform.localScale.x / 2 - 0.008f;
                         playerControls.blockMoveRight = true;
                         playerControls.Reset_Jumps();
@@ -108,7 +99,7 @@ public class NormalPlateform : AbstractPlateform
                     }
                     else
                     {
-                        //collisionSound.Play();
+                        CollisionSound.Play();
                         playerControls.blockMoveLeft = true;
                         playerControls.blockedPosition.x = plateformRight + playerControls.transform.localScale.x / 2 + 0.008f;
                         playerControls.Reset_Jumps();
@@ -147,7 +138,7 @@ public class NormalPlateform : AbstractPlateform
                     }
                     else
                     {
-                        //landingSound.Play();
+                        LandingSound.Play();
                         playerControls.blockMoveDown = true;
                         playerControls.blockedPosition.y = plateformUp + playerControls.transform.localScale.y / 2 + 0.008f;
                         playerControls.Reset_Jumps();
@@ -170,7 +161,7 @@ public class NormalPlateform : AbstractPlateform
                         else
                         {
                             
-                            //collisionSound.Play();
+                            CollisionSound.Play();
                             playerControls.blockMoveUp = true;
                             playerControls.blockedPosition.y = plateformDown - playerControls.transform.localScale.y / 2 - 0.008f;
                             playerControls.movementManager.RemoveForce(MovementManager.Forces.Jumping);
