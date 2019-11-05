@@ -7,6 +7,24 @@ public class NormalPlateform : AbstractPlateform
 {
     //Savoir si la plateform est traversable depuis le bas
     public bool traversable;
+
+    public float safeCollisionFactor;
+    
+    
+    [SerializeField]
+    public AudioSource passThroughSound;
+    
+    [SerializeField]
+    public AudioSource collisionSound;
+    
+    [SerializeField]
+    public AudioSource landingSound;
+
+    private void Start()
+    {
+        safeCollisionFactor = 0.002f;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -72,14 +90,15 @@ public class NormalPlateform : AbstractPlateform
                     //Permet de savoir si le joueur est déjà bloqué par une plateforme légèrement plus à gauche
                     if (playerControls.blockMoveRight)
                     {
-                        if (playerControls.blockedPosition.x > plateformLeft - playerControls.transform.localScale.x / 2 - 0.008f) 
+                        if (playerControls.blockedPosition.x > plateformLeft - playerControls.playerAnimations.newScaleX / 2 - safeCollisionFactor) 
                             
-                            playerControls.blockedPosition.x = plateformLeft - playerControls.transform.localScale.x / 2 - 0.008f;
+                            playerControls.blockedPosition.x = plateformLeft - playerControls.playerAnimations.newScaleX / 2 - safeCollisionFactor;
                     }
                     else
                     {
+                        playerControls.blockedPosition.x = plateformLeft - playerControls.playerAnimations.newScaleX / 2 - safeCollisionFactor;
                         CollisionSound.Play();
-                        playerControls.blockedPosition.x = plateformLeft - playerControls.transform.localScale.x / 2 - 0.008f;
+
                         playerControls.blockMoveRight = true;
                         playerControls.Reset_Jumps();
                     }
@@ -93,15 +112,15 @@ public class NormalPlateform : AbstractPlateform
                     //Permet de savoir si le joueur est déjà bloqué par une plateforme légèrement plus à droite
                     if (playerControls.blockMoveLeft)
                     {
-                        if (playerControls.blockedPosition.x < plateformRight + playerControls.transform.localScale.x / 2 + 0.008f)
+                        if (playerControls.blockedPosition.x < plateformRight + playerControls.playerAnimations.newScaleX / 2 + safeCollisionFactor)
                     
-                            playerControls.blockedPosition.x = plateformRight + playerControls.transform.localScale.x / 2 + 0.008f;
+                            playerControls.blockedPosition.x = plateformRight + playerControls.playerAnimations.newScaleX / 2 + safeCollisionFactor;
                     }
                     else
                     {
                         CollisionSound.Play();
                         playerControls.blockMoveLeft = true;
-                        playerControls.blockedPosition.x = plateformRight + playerControls.transform.localScale.x / 2 + 0.008f;
+                        playerControls.blockedPosition.x = plateformRight + playerControls.playerAnimations.newScaleX / 2 + safeCollisionFactor;
                         playerControls.Reset_Jumps();
                     }
                     On_Wall_Jump();
@@ -131,16 +150,16 @@ public class NormalPlateform : AbstractPlateform
                     //Permet de savoir si le joueur est déjà bloqué par une plateforme légèrement plus haute
                     if (playerControls.blockMoveDown)
                     {
-                        if (playerControls.blockedPosition.y < plateformUp + playerControls.transform.localScale.y / 2 + 0.008f)
+                        if (playerControls.blockedPosition.y < plateformUp + playerControls.playerAnimations.newScaleY / 2 + safeCollisionFactor)
                         {
-                            playerControls.blockedPosition.y = plateformUp + playerControls.transform.localScale.y / 2 + 0.008f;
+                            playerControls.blockedPosition.y = plateformUp + playerControls.playerAnimations.newScaleY / 2 + safeCollisionFactor;
                         }
                     }
                     else
                     {
                         LandingSound.Play();
                         playerControls.blockMoveDown = true;
-                        playerControls.blockedPosition.y = plateformUp + playerControls.transform.localScale.y / 2 + 0.008f;
+                        playerControls.blockedPosition.y = plateformUp + playerControls.playerAnimations.newScaleY / 2 + safeCollisionFactor;
                         playerControls.Reset_Jumps();
                     }
                 }
@@ -154,16 +173,16 @@ public class NormalPlateform : AbstractPlateform
                         //Permet de savoir si le joueur est déjà bloqué par une plateforme légèrement plus basse
                         if (playerControls.blockMoveUp)
                         {
-                            if (playerControls.blockedPosition.y > plateformDown - playerControls.transform.localScale.y / 2 - 0.008f)
+                            if (playerControls.blockedPosition.y > plateformDown - playerControls.playerAnimations.newScaleY / 2 - safeCollisionFactor)
                         
-                                playerControls.blockedPosition.y = plateformDown - playerControls.transform.localScale.y / 2 - 0.008f;
+                                playerControls.blockedPosition.y = plateformDown - playerControls.playerAnimations.newScaleY / 2 - safeCollisionFactor;
                         }
                         else
                         {
                             
                             CollisionSound.Play();
                             playerControls.blockMoveUp = true;
-                            playerControls.blockedPosition.y = plateformDown - playerControls.transform.localScale.y / 2 - 0.008f;
+                            playerControls.blockedPosition.y = plateformDown - playerControls.playerAnimations.newScaleY / 2 - safeCollisionFactor;
                             playerControls.movementManager.RemoveForce(MovementManager.Forces.Jumping);
                         }
                     }
