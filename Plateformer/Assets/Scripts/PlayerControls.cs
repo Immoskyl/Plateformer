@@ -21,6 +21,9 @@ public class PlayerControls : MonoBehaviour
     
     [SerializeField]
     public AudioSource colorChangeSound;
+
+    [SerializeField]
+    private Text text;
     
     public Vector2 speed
     {
@@ -38,6 +41,12 @@ public class PlayerControls : MonoBehaviour
     {
         get { return _color; }
         set { _color = value; }
+    }
+
+    public Text Text
+    {
+        get => text;
+        set => text = value;
     }
 
     public bool isOnPlateform;
@@ -92,6 +101,7 @@ public class PlayerControls : MonoBehaviour
     private void Awake()
     {
         color = Color.Green;
+        text.enabled = false;
     }
 
     private void LateUpdate()
@@ -167,4 +177,18 @@ public class PlayerControls : MonoBehaviour
     {
         movementManager.ResetJumps();
     }
+
+    public void DisplayText(string textToDisplay)
+    {
+        text.text = textToDisplay;
+        text.enabled = true;
+        StartCoroutine(RemoveAfterSeconds(7, text));
+    }
+    
+    IEnumerator RemoveAfterSeconds(int seconds, Text obj)
+    {
+        yield return new WaitForSeconds(seconds);
+        obj.enabled = false;
+    }
+          
 }

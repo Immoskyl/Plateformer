@@ -6,11 +6,16 @@ using UnityEngine.UI;
 
 public class GiveBonus : MonoBehaviour
 {
+    
+    [SerializeField]
+    public string textToDisplay = "";
+    
     /**
      * The player to give bonuses to
      */
     [SerializeField]
     private GameObject player;
+    
     
     /**
      * The player to give bonuses to
@@ -83,10 +88,18 @@ public class GiveBonus : MonoBehaviour
         player.GetComponent<PlayerControls>().IsYellowUnlocked = true;
     }
 
+    private void DisplayText()
+    {
+        if (textToDisplay != "")
+            player.GetComponent<PlayerControls>().DisplayText(textToDisplay);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
+            DisplayText();
+            
             bonusSound.Play(); 
             
             if (checkpoint != null)
