@@ -166,20 +166,20 @@ public class PlayerControls : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButton("SwitchRed") && isRedUnlocked)
+        if (Input.GetButtonDown("SwitchRed") && isRedUnlocked)
         {
             GetComponent<SpriteRenderer>().color = UnityEngine.Color.red;
             color = Color.Red;
             colorChangeSound.Play();
         }
-        else if (Input.GetButton("SwitchBlue") && isBlueUnlocked)
+        else if (Input.GetButtonDown("SwitchBlue") && isBlueUnlocked)
         {
             GetComponent<SpriteRenderer>().color = UnityEngine.Color.blue;
             color = Color.Blue;
             colorChangeSound.Play();
         }
 
-        else if (Input.GetButton("SwitchYellow") && isYellowUnlocked)
+        else if (Input.GetButtonDown("SwitchYellow") && isYellowUnlocked)
         {
             GetComponent<SpriteRenderer>().color = UnityEngine.Color.yellow;
             color = Color.Yellow;
