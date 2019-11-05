@@ -279,7 +279,7 @@ public class MovementManager : MonoBehaviour
     
     public void MovePlayer() 
     {
-        if (Input.GetKeyDown("space") && JumpsInARow < NumberOfJumps)
+        if (Input.GetButtonDown("Jump") && JumpsInARow < NumberOfJumps)
             Jump();
         Move();
     }
@@ -297,6 +297,7 @@ public class MovementManager : MonoBehaviour
     {
         JumpsInARow++;
         PlayJumpSound();
+        RemoveForce(Forces.Jumping);
         AddForce(Forces.Jumping, new Vector2(0, jumpStrength*10));
     }
 
