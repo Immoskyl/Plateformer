@@ -7,9 +7,6 @@ public class NormalPlateform : AbstractPlateform
     //Savoir si la plateform est traversable depuis le bas
     public bool traversable;
 
- 
-    
-    
     [SerializeField]
     public AudioSource passThroughSound;
     

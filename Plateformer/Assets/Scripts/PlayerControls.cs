@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControls : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class PlayerControls : MonoBehaviour
     private bool _isJumping;
 
     
+    [SerializeField]
+    public AudioSource colorChangeSound;
     
     public Vector2 speed
     {
@@ -89,6 +92,9 @@ public class PlayerControls : MonoBehaviour
     private void Awake()
     {
         color = Color.Red;
+        GetComponent<Canvas>().
+            GetComponent<Text>().
+            enabled = false;
     }
 
     private void LateUpdate()
@@ -143,17 +149,20 @@ public class PlayerControls : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().color = UnityEngine.Color.red;
             color = Color.Red;
+            colorChangeSound.Play();
         }
         else if (Input.GetButton("SwitchBlue") && isBlueUnlocked)
         {
             GetComponent<SpriteRenderer>().color = UnityEngine.Color.blue;
             color = Color.Blue;
+            colorChangeSound.Play();
         }
 
         else if (Input.GetButton("SwitchYellow") && isYellowUnlocked)
         {
             GetComponent<SpriteRenderer>().color = UnityEngine.Color.yellow;
             color = Color.Yellow;
+            colorChangeSound.Play();
         }
     }
 
