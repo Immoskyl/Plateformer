@@ -91,7 +91,7 @@ public class PlayerControls : MonoBehaviour
 
     private void Awake()
     {
-        color = Color.Red;
+        color = Color.Green;
     }
 
     private void LateUpdate()
