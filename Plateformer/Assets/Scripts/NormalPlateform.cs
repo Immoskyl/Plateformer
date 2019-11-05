@@ -29,6 +29,12 @@ public class NormalPlateform : AbstractPlateform
             if (playerControls.movementManager.GetForce(MovementManager.Forces.Jumping) != Vector2.zero) playerControls.movementManager.RemoveForce(MovementManager.Forces.Jumping);
         }
         */
+
+        if (!playerControls.blockMoveDown)
+        {
+            CollisionSound.Stop();
+        }
+
         playerControls.blockMoveDown = true;
         playerControls.blockedPosition.y = playerControls.transform.localPosition.y;
     }
