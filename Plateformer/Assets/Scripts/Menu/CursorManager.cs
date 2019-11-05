@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CursorManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class CursorManager : MonoBehaviour
     [SerializeField]
     [Range(1f, 20f)]
     private float speedCoef;
+
+    public List<GameObject> Buttons;
 
     public float SpeedCoef
     {
@@ -25,21 +28,18 @@ public class CursorManager : MonoBehaviour
     {
         if (Input.GetKeyDown("space"))
         {
-            Clic();
+           
         }
 
-        transform.Translate(Input.GetAxis("Horizontal") * SpeedCoef, Input.GetAxis("Vertical") * SpeedCoef, 0);
+        GetComponent<RectTransform>().transform.position = new Vector3(Input.GetAxis("Horizontal") * SpeedCoef, Input.GetAxis("Vertical") * SpeedCoef, 0);
+        //transform.Translate(Input.GetAxis("Horizontal") * SpeedCoef, Input.GetAxis("Vertical") * SpeedCoef, 0);
     }
 
     /**
      *  @todo
      */
-    void Clic()
+    void On_Clic()
     {
-        /*
-        if (transform.position = true)
-        {
-        }
-        */
+        
     }
 }

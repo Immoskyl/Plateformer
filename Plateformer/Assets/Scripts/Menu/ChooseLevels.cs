@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class ChooseLevels : MonoBehaviour
 {
+    public bool level2;
+    public bool quit;
 
     /**
      * Load a Scene by its index referenced in the Build Manager
