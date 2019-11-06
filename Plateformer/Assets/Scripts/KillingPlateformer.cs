@@ -31,9 +31,13 @@ public class KillingPlateformer : AbstractPlateform
         
         if 
         ( 
-            ((plateformDown < playerDown && playerDown < plateformUp) || (plateformDown < playerUP && playerUP < plateformUp))
+            (((plateformDown < playerDown && playerDown < plateformUp) || (plateformDown < playerUP && playerUP < plateformUp))
             && 
-            ((plateformLeft < playerRight && playerRight < plateformRight) || (plateformLeft < playerLeft && playerLeft < plateformRight))
+            ((plateformLeft < playerRight && playerRight < plateformRight) || (plateformLeft < playerLeft && playerLeft < plateformRight)))
+            ||
+            (plateformDown > playerDown && plateformUp < playerUP && ((plateformLeft < playerRight && playerRight < plateformRight) || (plateformLeft < playerLeft && playerLeft < plateformRight)))
+            ||
+            (plateformLeft > playerLeft && plateformRight < playerRight && ((plateformDown < playerDown && playerDown < plateformUp) || (plateformDown < playerUP && playerUP < plateformUp)))
         )
         {
             playerControls.movementManager.Die();
